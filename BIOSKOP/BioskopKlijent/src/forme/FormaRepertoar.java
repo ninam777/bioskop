@@ -22,6 +22,7 @@ import model.ModelTabeleFilm;
 import model.ModelTabeleRezervacija;
 import model.ModelTabeleVremenaProjekcija;
 import sesija.Sesija;
+import start.KlijentStart;
 
 /**
  *
@@ -30,17 +31,18 @@ import sesija.Sesija;
 public class FormaRepertoar extends javax.swing.JFrame {
 
     Kontroler k;
+
     /**
      * Creates new form FormaRepertoar
      */
     public FormaRepertoar(java.awt.Frame parent, boolean modal) {
 //        super(parent, modal);
 //        this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        
+
 //        Sesija.vratiInstancu().getMapa().put("nacin", "unos");
         initComponents();
     }
-    
+
     FormaRepertoar() {
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 //        Sesija.vratiInstancu().getMapa().put("nacin", "prikaz");
@@ -312,27 +314,59 @@ public class FormaRepertoar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnKupiActionPerformed
 
     private void btnObrisiFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiFilmActionPerformed
+//        try {
         ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
+        List<Film> filmBrisi = mtf.getLista();
+        Film fBrisi = filmBrisi.get(jtFilmovi.getSelectedRow());
 
-        int red = jtFilmovi.getSelectedRow();
+        boolean uspesnost;
 
-        if (red == -1) {
-            JOptionPane.showMessageDialog(this, "Odaberite red");
-        } else {
-            mtf.obrisiRed(red);
+        try {
+            uspesnost = k.obrisiFilm(fBrisi);
+
+            if (uspesnost) {
+                JOptionPane.showMessageDialog(this, "Uspesno izbrisan film: " + fBrisi.getNazivFilma());
+            } else {
+                JOptionPane.showMessageDialog(this, "Nije obrisan film: " + fBrisi.getNazivFilma());
+            }
+
+            srediFormu();
+
+        } catch (IOException ex) {
+            Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        } catch (ArrayIndexOutOfBoundsException e) {
+//            JOptionPane.showMessageDialog(this, "Niste odabrali klijenta za brisanje.");
+//        }
     }//GEN-LAST:event_btnObrisiFilmActionPerformed
 
     private void btnObrisiRezervacijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiRezervacijuActionPerformed
+//        try {
         ModelTabeleRezervacija mtr = (ModelTabeleRezervacija) jtRezervacije.getModel();
+        List<Rezervacija> rezervacijaBrisi = mtr.getLista();
+        Rezervacija rBrisi = rezervacijaBrisi.get(jtRezervacije.getSelectedRow());
 
-        int red = jtRezervacije.getSelectedRow();
+        boolean uspesnost;
 
-        if (red == -1) {
-            JOptionPane.showMessageDialog(this, "Odaberite red");
-        } else {
-            mtr.obrisiRed(red);
+        try {
+            uspesnost = k.obrisiRezervaciju(rBrisi);
+
+            if (uspesnost) {
+                JOptionPane.showMessageDialog(this, "Uspesno izbrisana rezervacija: " + rBrisi.getNazivRezervacije());
+            } else {
+                JOptionPane.showMessageDialog(this, "Nije obrisana rezervacija: " + rBrisi.getNazivRezervacije());
+            }
+            srediFormu();
+        } catch (IOException ex) {
+            Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        } catch (ArrayIndexOutOfBoundsException e) {
+//            JOptionPane.showMessageDialog(this, "Niste odabrali klijenta za brisanje.");
+//        }
     }//GEN-LAST:event_btnObrisiRezervacijuActionPerformed
 
     private void btnRezervisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRezervisiActionPerformed
@@ -384,7 +418,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
     private void btnIzmeniFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniFilmActionPerformed
 //        new FormaPostavljanjeFilma().setVisible(true);
 //        TODO: dodati podatke
-        
+
         Sesija.vratiInstancu().getMapa().put("rezim", "izmena");
         int red = jtFilmovi.getSelectedRow();
         if (red == -1) {
@@ -443,7 +477,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
                 new FormaRepertoar().setVisible(true);
             }
         });
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -474,28 +508,28 @@ public class FormaRepertoar extends javax.swing.JFrame {
     private void srediFormu() throws IOException, ClassNotFoundException {
         ModelTabeleFilm mtf = new ModelTabeleFilm();
         ModelTabeleRezervacija mtr = new ModelTabeleRezervacija();
-        
+
         List<AbstractObjekat> filmovi = new ArrayList<>();
         List<AbstractObjekat> rezervacije = new ArrayList<>();
         ArrayList<Film> listaF = new ArrayList<>();
         ArrayList<Rezervacija> listaR = new ArrayList<>();
-        
+
         filmovi = k.pretraziFilmove("");
         rezervacije = k.pretraziRezervacije("");
-        
+
         for (AbstractObjekat ao : filmovi) {
             Film f = (Film) ao;
             listaF.add(f);
         }
-        
+
         for (AbstractObjekat ao : rezervacije) {
             Rezervacija r = (Rezervacija) ao;
             listaR.add(r);
         }
-        
+
         mtf.setLista(listaF);
         mtr.setLista(listaR);
-        
+
         jtFilmovi.setModel(mtf);
         jtRezervacije.setModel(mtr);
     }

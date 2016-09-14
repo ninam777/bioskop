@@ -86,8 +86,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         btnSacuvajFilm = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         btnDodaj = new javax.swing.JButton();
-        jtfID = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
 
         setTitle("Postavljanje filma");
 
@@ -163,8 +161,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setText("ID:");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -199,18 +195,14 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel12))
+                                    .addComponent(jLabel1))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtfNazivFilma, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jtfVremeTrajanjaFilma, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel11))
-                                            .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtfVremeTrajanjaFilma, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel11)
                                         .addGap(0, 0, Short.MAX_VALUE)))))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,11 +224,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfNazivFilma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -359,7 +347,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 //            }
 //
         } else {
-//            String id = jtfID.getText().trim();
+//            String id = jtfID.getText().trim(); // ovo polje je izbrisano, pogledaj da li ima jos negde, pa izbrisi
             String nazivFilma = jtfNazivFilma.getText().trim();
             String zanr = jtfZanrFilma.getText().trim();
             int trajanje = Integer.parseInt(jtfVremeTrajanjaFilma.getText().trim());
@@ -486,7 +474,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -500,7 +487,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
     private javax.swing.JTable jtVremenaProjekcija;
     private javax.swing.JTextArea jtaSadrzaj;
     private javax.swing.JTextField jtfGlumci;
-    private javax.swing.JTextField jtfID;
     private javax.swing.JTextField jtfNazivFilma;
     private javax.swing.JTextField jtfPeriodPrikazivanjaDo;
     private javax.swing.JTextField jtfPeriodPrikazivanjaOd;
