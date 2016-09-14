@@ -60,10 +60,13 @@ public class SOPretraziFilmove extends AbstractSO{
             if (f.getNazivFilma().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
                     || f.getReziser().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
                     || f.getGlumci().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
-                    || f.getZanr().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
-                    || f.getRadnik().getIme().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
+                    || f.getZanr().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
+//                    || f.getRadnik().getIme().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
                 return true;
+            } else {
+                System.out.println("Nije ispunio ni jedan uslov");
             }
+            System.out.println("Zavrsio if");
         }
         return false;
     }

@@ -63,8 +63,8 @@ public class SOPretraziRezervacije extends AbstractSO{
         String[] unosiPretrage = kriterijumPretrage.split(" ");
         for (String unosPretrage : unosiPretrage) {
             if (rez.getNazivRezervacije().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
-                    || rez.getProjekcija().getFilm().getNazivFilma().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
-                    || rez.getRadnik().getIme().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
+                    || rez.getProjekcija().getFilm().getNazivFilma().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
+//                    || rez.getRadnik().getIme().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
                 return true;
             }
         }

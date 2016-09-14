@@ -115,6 +115,7 @@ public class ModelTabeleFilm extends AbstractTableModel {
 //        TODO: Zameni Object za agregaciju
     public void setLista(ArrayList<Film> lista) {
         this.lista = lista;
+        fireTableDataChanged();
     }
 
     public void dodajRed() {

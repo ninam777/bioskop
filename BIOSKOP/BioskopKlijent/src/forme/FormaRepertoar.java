@@ -52,8 +52,8 @@ public class FormaRepertoar extends javax.swing.JFrame {
         k = new Kontroler();
         try {
             srediFormu();
-            NitOsvezi no = new NitOsvezi(this);
-            no.start();
+//            NitOsvezi no = new NitOsvezi(this);
+//            no.start();
         } catch (IOException ex) {
             Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -311,6 +311,13 @@ public class FormaRepertoar extends javax.swing.JFrame {
 
     private void btnDodajFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDodajFilmActionPerformed
         new FormaPostavljanjeFilma().setVisible(true);
+        try {
+            srediFormu();
+        } catch (IOException ex) {
+            Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnDodajFilmActionPerformed
 
     private void btnKupiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKupiActionPerformed
@@ -393,6 +400,8 @@ public class FormaRepertoar extends javax.swing.JFrame {
                 lista.add(f);
             }
             mtf.setLista(lista);
+            jtFilmovi.setModel(mtf);
+//            srediFormu();
         } catch (IOException ex) {
             Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -412,6 +421,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
                 lista.add(r);
             }
             mtr.setLista(lista);
+            jtFilmovi.setModel(mtr);
         } catch (IOException ex) {
             Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

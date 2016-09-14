@@ -190,6 +190,7 @@ public class ModelTabeleRezervacija extends AbstractTableModel {
 //        TODO: Zameni Object za agregaciju
     public void setLista(ArrayList<Rezervacija> lista) {
         this.lista = lista;
+        fireTableDataChanged();
     }
 
     public void dodajRed() {
