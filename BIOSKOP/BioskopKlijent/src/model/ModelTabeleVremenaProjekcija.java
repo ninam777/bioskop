@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
+import sesija.Sesija;
 
 /**
  *
@@ -32,7 +33,6 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
         this.listaSala = listaSala;
     }
 
-   
     public ModelTabeleVremenaProjekcija() {
         lista = new ArrayList<>();
     }
@@ -92,14 +92,18 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         //        TODO: Zameni Object za agregaciju
         Projekcija p = lista.get(rowIndex);
-
+        String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
         switch (columnIndex) {
             case 0:
-                for (Sala s : listaSala) {
-                    if (s.getNazivSale().equals(aValue)) {
-                        p.setSala(s);
+                if ("izmena".equals(rezim)) {
+                    p.setSala((Sala) aValue);
+                } //else {
+                    for (Sala s : listaSala) {
+                        if (s.getNazivSale().equals(aValue)) {
+                            p.setSala(s);
+                        }
                     }
-                }
+                //}
                 break;
             case 1:
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");

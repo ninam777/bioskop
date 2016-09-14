@@ -360,7 +360,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 
 //            Sluzbenik sl = (Sluzbenik) Sesija.vratiInstancu().getMapa().get("sluzbenik");
             Radnik radnik = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
-            
+
             Film f = new Film(0, nazivFilma, zanr, trajanje, reziser, glumci, opis, periodprikazivanja, radnik);
             ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
 
@@ -496,7 +496,18 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void popuniCBuTabeli() throws IOException, ClassNotFoundException {
-        ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+
+        String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
+
+        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
+        if ("izmena".equals(rezim)) {
+            
+            //TODO: uradi ovde kako da se vraca kombo boks :)
+        } else {
+
+            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+        }
+//        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
 //        List<AbstractObjekat> projekcije = new ArrayList<>();
 //        projekcije = k.vratiListuProjekcija();
         ArrayList<Sala> listaSala = new ArrayList<>();
@@ -517,18 +528,18 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
             Sala sala = s.getSala();
 //            System.out.println("sala "+ sala);
 //            System.out.println("provera "+listaSala.contains(sala));
-            if(listaSala.isEmpty()){
+            if (listaSala.isEmpty()) {
                 listaSala.add(sala);
                 idevi.add(sala.getSalaID());
             } else {
-                if(!idevi.contains(sala.getSalaID())){
+                if (!idevi.contains(sala.getSalaID())) {
                     listaSala.add(sala);
                     idevi.add(sala.getSalaID());
                 }
             }
-            
+
         }
-        
+
         for (Sala sala : listaSala) {
             kombo.addItem(sala.getNazivSale());
         }
@@ -571,12 +582,35 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 
     private void srediFormu() {
         String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
+        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
         if ("izmena".equals(rezim)) {
-            prikaziFilm((Film) Sesija.vratiInstancu().getMapa().get("film"));
+//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+            Film f = (Film) Sesija.vratiInstancu().getMapa().get("film");
+            prikaziFilm(f);
+//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
 //            prikaziKlijenta((Klijent) Sesija.vratiInstancu().getMapa().get("klijent"));
 //
 //            jbtnDodaj.setVisible(false);
 //            jbtnUkloni.setVisible(false);
+            ArrayList<Projekcija> lista = new ArrayList<>();
+            try {
+                List<AbstractObjekat> projekcije = k.vratiListuProjekcija();
+
+                for (AbstractObjekat ao : projekcije) {
+                    Projekcija p = (Projekcija) ao;
+                    if (p.getFilm().getFilmID() == f.getFilmID()) {
+                        lista.add(p);
+                    }
+                }
+
+                popuniCBuTabeli();
+            } catch (IOException ex) {
+                Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            mtvp.setLista(lista);
+
         } else {
 
 //            try {
@@ -589,7 +623,13 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
             ocistiPolja();
 
         }
-        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
+//        try {
+//            popuniCBuTabeli();
+//        } catch (IOException ex) {
+//            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         jtVremenaProjekcija.setModel(mtvp);
     }
 
@@ -603,8 +643,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         jtfPeriodPrikazivanjaOd.setText("");
         jtfPeriodPrikazivanjaDo.setText("");
     }
-    
-    
+
     private void prikaziFilm(Film film) {
         jtfNazivFilma.setText(film.getNazivFilma());
         jtfZanrFilma.setText(film.getZanr());
@@ -618,7 +657,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 //        int ind = film.getPeriodPrikazivanja().indexOf("-");
 //        String od = film.getPeriodPrikazivanja().substring(0, ind);
 //        String dop = film.getPeriodPrikazivanja().substring(ind);
-        
+
         jtfPeriodPrikazivanjaOd.setText(odp);
         jtfPeriodPrikazivanjaDo.setText(dop);
 

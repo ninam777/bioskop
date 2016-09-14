@@ -449,7 +449,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
                 Sesija.vratiInstancu().getMapa().put("film", f);
 //                new FKlijent().setVisible(true);
                 new FormaPostavljanjeFilma().setVisible(true);
-                this.dispose();
+//                this.dispose();
             } catch (IOException ex) {
                 Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
