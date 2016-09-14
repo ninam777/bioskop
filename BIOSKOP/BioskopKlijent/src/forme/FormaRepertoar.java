@@ -21,6 +21,7 @@ import kontroler.Kontroler;
 import model.ModelTabeleFilm;
 import model.ModelTabeleRezervacija;
 import model.ModelTabeleVremenaProjekcija;
+import osvezi.NitOsvezi;
 import sesija.Sesija;
 import start.KlijentStart;
 
@@ -41,6 +42,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
 
 //        Sesija.vratiInstancu().getMapa().put("nacin", "unos");
         initComponents();
+
     }
 
     FormaRepertoar() {
@@ -50,6 +52,8 @@ public class FormaRepertoar extends javax.swing.JFrame {
         k = new Kontroler();
         try {
             srediFormu();
+            NitOsvezi no = new NitOsvezi(this);
+            no.start();
         } catch (IOException ex) {
             Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -425,7 +429,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nije odabran nijedan film.", "Izmena", INFORMATION_MESSAGE);
         } else {
             try {
-                String id = (String) jtFilmovi.getValueAt(red, 0);
+                int id = (int) jtFilmovi.getValueAt(red, 0);
                 Film f = new Film();
 //                Klijent kl = new Klijent();
                 f = k.vratiFilm(id);
@@ -505,7 +509,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jtpRiR;
     // End of variables declaration//GEN-END:variables
 
-    private void srediFormu() throws IOException, ClassNotFoundException {
+    public void srediFormu() throws IOException, ClassNotFoundException {
         ModelTabeleFilm mtf = new ModelTabeleFilm();
         ModelTabeleRezervacija mtr = new ModelTabeleRezervacija();
 

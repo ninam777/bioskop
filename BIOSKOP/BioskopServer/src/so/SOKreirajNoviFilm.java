@@ -23,7 +23,7 @@ public class SOKreirajNoviFilm extends AbstractSO {
 
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
-        id = DBBroker.vratiInstancu().vratiMaksID(film);
+        id = db.vratiMaksID(film);
     }
 
     public int getId() {

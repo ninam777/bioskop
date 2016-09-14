@@ -126,7 +126,7 @@ public class Kontroler {
         }
     }
 
-    public Film vratiFilm(String id) throws IOException, ClassNotFoundException {
+    public Film vratiFilm(int id) throws IOException, ClassNotFoundException {
         KlijentskiTransferObjekat kt = new KlijentskiTransferObjekat();
         kt.setOperacija(Konstante.OPERACIJA_VRATI_FILM);
         kt.setParametar(id);
