@@ -80,7 +80,7 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
         cbProjekcija = new javax.swing.JComboBox();
         jtfNazivFilma = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnDodaj.setText("Dodaj");
         btnDodaj.addActionListener(new java.awt.event.ActionListener() {
@@ -364,20 +364,5 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
             cbProjekcija.addItem(p);
         }
 
-//        TODO: U zavisnosti od CB odaberi KLASU IZ DOMENA, i Konstanta VRATI_KLASA
-//        KlijentskiTransferObjekat kto = new KlijentskiTransferObjekat();
-//        kto.setOperacija(Konstante.VRATI_KLIJENTE);
-//
-//        Komunikacija.getInstanca().posaljiZahtev(kto);
-//
-//        ServerskiTransferObjekat sto = Komunikacija.getInstanca().primiOdgovor();
-//
-//        ArrayList<Klijent> lista = (ArrayList<Klijent>) sto.getOdgovor();
-//
-//        cbKlijent.removeAllItems();
-//
-//        for (Klijent kl : lista) {
-//            cbKlijent.addItem(kl);
-//        }
     }
 }

@@ -321,7 +321,20 @@ public class FormaRepertoar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajFilmActionPerformed
 
     private void btnKupiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKupiActionPerformed
-        new FormaKupovinaKarata().setVisible(true);
+        ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
+        List<Film> filmovi = mtf.getLista();
+
+        int red = jtFilmovi.getSelectedRow();
+
+        if (red == -1) {
+            JOptionPane.showMessageDialog(this, "Odaberite red");
+        } else {
+            Film f = filmovi.get(red);
+
+            Sesija.vratiInstancu().getMapa().put("film", f);
+
+            new FormaKupovinaKarata().setVisible(true);
+        }
     }//GEN-LAST:event_btnKupiActionPerformed
 
     private void btnObrisiFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiFilmActionPerformed
@@ -384,14 +397,38 @@ public class FormaRepertoar extends javax.swing.JFrame {
 
         ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
         List<Film> filmovi = mtf.getLista();
-        Film f = filmovi.get(jtFilmovi.getSelectedRow());
+//        Film f = filmovi.get(jtFilmovi.getSelectedRow());
+
+        int red = jtFilmovi.getSelectedRow();
+
+        if (red == -1) {
+            JOptionPane.showMessageDialog(this, "Odaberite red");
+        } else {
+            Film f = filmovi.get(red);
 //        String nazivFilma = f.getNazivFilma();
-        Sesija.vratiInstancu().getMapa().put("film", f);
-        new FormaRezervacijaKarata().setVisible(true);
+            Sesija.vratiInstancu().getMapa().put("film", f);
+            new FormaRezervacijaKarata().setVisible(true);
+        }
     }//GEN-LAST:event_btnRezervisiActionPerformed
 
     private void btnKupiKarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKupiKarteActionPerformed
-        new FormaKupovinaKarata().setVisible(true);
+//        ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
+        ModelTabeleRezervacija mtr = (ModelTabeleRezervacija) jtRezervacije.getModel();
+        List<Rezervacija> rezervacije = mtr.getLista();
+
+//        int red = jtFilmovi.getSelectedRow();
+        int red = jtRezervacije.getSelectedRow();
+
+        if (red == -1) {
+            JOptionPane.showMessageDialog(this, "Odaberite red");
+        } else {
+//            Film f = filmovi.get(red);
+            Rezervacija r = rezervacije.get(red);
+
+            Sesija.vratiInstancu().getMapa().put("rezervacija", r);
+
+            new FormaKupovinaKarata().setVisible(true);
+        }
     }//GEN-LAST:event_btnKupiKarteActionPerformed
 
     private void btnPronadjiFilmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPronadjiFilmActionPerformed

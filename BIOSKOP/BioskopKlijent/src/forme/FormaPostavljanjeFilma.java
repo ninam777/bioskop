@@ -87,6 +87,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         btnObrisi = new javax.swing.JButton();
         btnDodaj = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Postavljanje filma");
 
         jLabel1.setText("Naziv filma:");
