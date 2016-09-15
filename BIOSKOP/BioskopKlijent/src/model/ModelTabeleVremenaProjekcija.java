@@ -95,15 +95,22 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
         String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
         switch (columnIndex) {
             case 0:
-                if ("izmena".equals(rezim)) {
-                    p.setSala((Sala) aValue);
-                } //else {
+//                if ("izmena".equals(rezim)) {
+//                    System.out.println("aval " + aValue);
+//                    Sala sala = (Sala) aValue;
+//                    p.setSala((Sala) aValue);
+//                } else {
+                if(!listaSala.isEmpty()){
+                  
+                    
                     for (Sala s : listaSala) {
-                        if (s.getNazivSale().equals(aValue)) {
+//                        if (s.getNazivSale().equals(aValue)) {
+                        if (s.equals(aValue)) {
                             p.setSala(s);
                         }
                     }
-                //}
+                }
+//                }
                 break;
             case 1:
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");

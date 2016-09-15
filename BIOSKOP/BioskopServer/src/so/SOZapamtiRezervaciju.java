@@ -6,10 +6,13 @@
 package so;
 
 import domen.AbstractObjekat;
+import domen.Rezervacija;
+import domen.RezervisanoSediste;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import kontroler.Kontroler;
 
 /**
  *
@@ -28,6 +31,14 @@ public class SOZapamtiRezervaciju extends AbstractSO {
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
+            Rezervacija r = (Rezervacija) rezervacija;
+            int id = Kontroler.vratiMaxRezervacija(r);
+            r.setRezervacijaID(id+1);
+            rezervacija = r;
+            for (AbstractObjekat ao : listaRezSedista) {
+                RezervisanoSediste rs = (RezervisanoSediste) ao;
+                rs.setRezervacija(r);
+            }
             db.sacuvajObjekat(rezervacija);
             db.sacuvajObjekte(listaRezSedista);
         } catch (SQLException ex) {

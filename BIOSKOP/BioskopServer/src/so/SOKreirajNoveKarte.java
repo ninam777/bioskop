@@ -23,7 +23,7 @@ public class SOKreirajNoveKarte extends AbstractSO {
 
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
-        id = DBBroker.vratiInstancu().vratiMaksID(karta);
+        id = db.vratiMaksID(karta);
     }
 
     public int getId() {

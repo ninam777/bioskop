@@ -6,6 +6,7 @@
 package forme;
 
 import domen.AbstractObjekat;
+import domen.Film;
 import domen.Projekcija;
 import domen.Radnik;
 import domen.Rezervacija;
@@ -229,7 +230,7 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
         Projekcija projekcija = (Projekcija) cbProjekcija.getSelectedItem();
 
         Radnik radnik = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
-        Rezervacija r = new Rezervacija(projekcija, -1, nazivRezervacije, radnik);
+        Rezervacija r = new Rezervacija(projekcija, 0, nazivRezervacije, radnik);
 
         ModelTabeleRediSedista mtrs = (ModelTabeleRediSedista) jtRediSedista.getModel();
 
@@ -241,6 +242,8 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
             List<RezervisanoSediste> rezSedista = new ArrayList<>();
 
             for (Sediste sediste : sedista) {
+                sediste.setRezervisano(true);
+                sediste.setSala(projekcija.getSala());
                 RezervisanoSediste rs = new RezervisanoSediste(r, sediste, 30);
                 rezSedista.add(rs);
             }
@@ -322,33 +325,43 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void srediFormu() throws IOException, ClassNotFoundException {
+        Film film = (Film) Sesija.vratiInstancu().getMapa().get("film");
+        jtfNazivFilma.setText(film.getNazivFilma());
+        
+        
         ModelTabeleRediSedista mtrs = new ModelTabeleRediSedista();
         jtRediSedista.setModel(mtrs);
-        List<AbstractObjekat> filmovi = new ArrayList<>();
-        filmovi = k.pretraziFilmove(jtfNazivFilma.getText().trim());
+//        List<AbstractObjekat> filmovi = new ArrayList<>();
+//        filmovi = k.pretraziFilmove(jtfNazivFilma.getText().trim());
 
         List<AbstractObjekat> projekcije = new ArrayList<>();
         projekcije = k.vratiListuProjekcija();
 
-        List<AbstractObjekat> lista = new ArrayList<>();
+        ArrayList<Projekcija> lista = new ArrayList<>();
 
-        if (filmovi.isEmpty()) {
-            lista = projekcije;
-        } else {
-            for (AbstractObjekat ao : projekcije) {
-                Projekcija p = (Projekcija) ao;
-                for (AbstractObjekat f : filmovi) {
-                    if (p.getFilm().equals(f)) {
-                        lista.add(p);
-                    }
-                }
+//        if (filmovi.isEmpty()) {
+//            lista = projekcije;
+//        } else {
+//            for (AbstractObjekat ao : projekcije) {
+//                Projekcija p = (Projekcija) ao;
+//                for (AbstractObjekat f : filmovi) {
+//                    if (p.getFilm().equals(f)) {
+//                        lista.add(p);
+//                    }
+//                }
+//            }
+//        }
+        for (AbstractObjekat ao : projekcije) {
+            Projekcija p = (Projekcija) ao;
+            if (p.getFilm().getFilmID()==film.getFilmID()){
+                lista.add(p);
             }
         }
 
         cbProjekcija.removeAllItems();;
 
-        for (AbstractObjekat ao : lista) {
-            cbProjekcija.addItem(ao);
+        for (Projekcija p : lista) {
+            cbProjekcija.addItem(p);
         }
 
 //        TODO: U zavisnosti od CB odaberi KLASU IZ DOMENA, i Konstanta VRATI_KLASA

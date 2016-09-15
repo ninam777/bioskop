@@ -64,7 +64,7 @@ public class RezervisanoSediste extends AbstractObjekat{
 
     @Override
     public String vratiParametre() {
-        return getRezervacija().getRezervacijaID() + ", " + getSediste().getSala().getSalaID() + ", " + getSediste().getRed() + ", " + getSediste().getBrojSedista() + ", " + trajanjeRezervacije + "" ;
+        return getRezervacija().getProjekcija().getProjekcijaID()+ ", " + getRezervacija().getRezervacijaID() + ", " + getSediste().getSala().getSalaID() + ", " + getSediste().getRed() + ", " + getSediste().getBrojSedista() + ", " + trajanjeRezervacije + "" ;
     }
 
     @Override
@@ -88,7 +88,7 @@ public class RezervisanoSediste extends AbstractObjekat{
                 int red = rs.getInt("red");
                 int brojSedista = rs.getInt("brojSedista");
                 int trajanjeRezervacije = rs.getInt("trajanjeRezervacije");
-                RezervisanoSediste rezSed = new RezervisanoSediste(new Rezervacija(new Projekcija(projekcijaID, null, null, null, null), rezervacijaID, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista), trajanjeRezervacije);
+                RezervisanoSediste rezSed = new RezervisanoSediste(new Rezervacija(new Projekcija(projekcijaID, null, null, null, null), rezervacijaID, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista, false, false), trajanjeRezervacije);
                 rezervisanaSedista.add(rezSed);
             }
         } catch (Exception e) {

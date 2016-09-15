@@ -23,7 +23,7 @@ public class SOKreirajNovuRezervaciju extends AbstractSO {
 
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
-        id = DBBroker.vratiInstancu().vratiMaksID(rezervacija);
+        id = db.vratiMaksID(rezervacija);
     }
 
     public int getId() {

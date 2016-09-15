@@ -25,13 +25,6 @@ public class SOZapamtiFilm extends AbstractSO {
 
     public SOZapamtiFilm(AbstractObjekat film, List<AbstractObjekat> projekcije) {
         this.film = film;
-//        Film f = (Film) film;
-//        int id = Kontroler.vratiMaxFilm(f);
-//        f.setFilmID(id+1);
-//        for (AbstractObjekat ao : projekcije) {
-//            Projekcija p = (Projekcija) ao;
-//            p.setFilm(f);
-//        }
         this.projekcije = projekcije;
     }
 

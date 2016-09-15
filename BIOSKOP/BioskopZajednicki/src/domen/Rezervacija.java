@@ -79,7 +79,7 @@ public class Rezervacija extends AbstractObjekat{
 
     @Override
     public String vratiPK() {
-        return "nema";
+        return "rezervacijaID";
     }
 
     @Override

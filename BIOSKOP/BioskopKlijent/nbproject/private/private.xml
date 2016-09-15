@@ -3,9 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Nina/bioskop/BIOSKOP/BioskopKlijent/src/model/ModelTabeleFilm.java</file>
+            <file>file:/C:/Nina/bioskop/BIOSKOP/BioskopKlijent/src/model/ModelTabeleVremenaProjekcija.java</file>
             <file>file:/C:/Nina/bioskop/BIOSKOP/BioskopKlijent/src/forme/FormaRepertoar.java</file>
-            <file>file:/C:/Nina/bioskop/BIOSKOP/BioskopKlijent/src/kontroler/Kontroler.java</file>
+            <file>file:/C:/Nina/bioskop/BIOSKOP/BioskopKlijent/src/forme/FormaPostavljanjeFilma.java</file>
         </group>
     </open-files>
 </project-private>

@@ -113,7 +113,7 @@ public class Karta extends AbstractObjekat{
                 int red = rs.getInt("red");
                 int brojSedista = rs.getInt("brojSedista");
 //                Klijent k = new Klijent(klID, matBroj, pib, tekuciRacun, email, new Mesto(ptt, null), naziv);
-                Karta k = new Karta(new Projekcija(projekcijaID, null, null, null, null), kartaID, cena, new Radnik(radnikID, null, null, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista));
+                Karta k = new Karta(new Projekcija(projekcijaID, null, null, null, null), kartaID, cena, new Radnik(radnikID, null, null, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista, false, false));
                 karte.add(k);
             }
         } catch (Exception e) {

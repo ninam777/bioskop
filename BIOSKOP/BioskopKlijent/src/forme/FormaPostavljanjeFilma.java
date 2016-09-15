@@ -499,14 +499,14 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 
         String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
 
-        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
-        if ("izmena".equals(rezim)) {
-            
-            //TODO: uradi ovde kako da se vraca kombo boks :)
-        } else {
-
-            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-        }
+//        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
+//        if ("izmena".equals(rezim)) {
+//            
+//            //TODO: uradi ovde kako da se vraca kombo boks :)
+//        } else {
+//
+//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+//        }
 //        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
 //        List<AbstractObjekat> projekcije = new ArrayList<>();
 //        projekcije = k.vratiListuProjekcija();
@@ -541,10 +541,36 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         }
 
         for (Sala sala : listaSala) {
-            kombo.addItem(sala.getNazivSale());
+//            kombo.addItem(sala.getNazivSale());
+            kombo.addItem(sala);
         }
 //        System.out.println("Lista sala " + listaSala);
-        mtvp.setListaSala(listaSala);
+
+//        if ("izmena".equals(rezim)) {
+//            ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
+//            jtVremenaProjekcija.setModel(mtvp);
+//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+//            System.out.println("lista sala 1" + listaSala);
+//            mtvp.setListaSala(listaSala);
+//            System.out.println("lista sala 2" + listaSala);
+            
+            
+//            int red = jtVremenaProjekcija.getSelectedRow();
+//
+//            if (red == -1) {
+////                JOptionPane.showMessageDialog(this, "Odaberite red");
+//                red = 0;
+//            } else {
+////                red = 0;
+//            }
+//            Sala s = (Sala) jtVremenaProjekcija.getValueAt(red, 0);
+//            //TODO: uradi ovde kako da se vraca kombo boks :)
+//            System.out.println("Proslo");
+//        } else {
+        
+            ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+            mtvp.setListaSala(listaSala);
+//        }
 
         TableColumnModel tcm = jtVremenaProjekcija.getColumnModel();
         TableColumn kolona = tcm.getColumn(0);
@@ -602,8 +628,8 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
                         lista.add(p);
                     }
                 }
-
-                popuniCBuTabeli();
+                srediTabeluUrezimuIzmena();
+//                popuniCBuTabeli();
             } catch (IOException ex) {
                 Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
@@ -661,5 +687,43 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         jtfPeriodPrikazivanjaOd.setText(odp);
         jtfPeriodPrikazivanjaDo.setText(dop);
 
+    }
+
+    private void srediTabeluUrezimuIzmena() {
+        String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
+        
+        if ("izmena".equals(rezim)) {
+            ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
+            jtVremenaProjekcija.setModel(mtvp);
+            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+//            System.out.println("lista sala 1" + listaSala);
+//            mtvp.setListaSala(listaSala);
+//            System.out.println("lista sala 2" + listaSala);
+            
+            
+//            int red = jtVremenaProjekcija.getSelectedRow();
+//
+//            if (red == -1) {
+////                JOptionPane.showMessageDialog(this, "Odaberite red");
+//                red = 0;
+//            } else {
+////                red = 0;
+//            }
+//            Sala s = (Sala) jtVremenaProjekcija.getValueAt(red, 0);
+//            //TODO: uradi ovde kako da se vraca kombo boks :)
+//            System.out.println("Proslo");
+//        } else {
+        
+//            ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+//            mtvp.setListaSala(listaSala);
+        }
+        
+        try {
+            popuniCBuTabeli();
+        } catch (IOException ex) {
+            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

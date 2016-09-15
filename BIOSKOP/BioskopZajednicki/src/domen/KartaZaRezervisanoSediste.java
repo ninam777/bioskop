@@ -90,7 +90,7 @@ public class KartaZaRezervisanoSediste extends AbstractObjekat{
                 int red = rs.getInt("red");
                 int brojSedista = rs.getInt("brojSedista");
                 int kartaID = rs.getInt("kartaID");
-                KartaZaRezervisanoSediste kzrs = new KartaZaRezervisanoSediste(new Rezervacija(new Projekcija(projekcijaID, null, null, null, null), rezervacijaID, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista), new Karta(new Projekcija(projekcijaID, null, null, null, null), kartaID, 0, null, null));
+                KartaZaRezervisanoSediste kzrs = new KartaZaRezervisanoSediste(new Rezervacija(new Projekcija(projekcijaID, null, null, null, null), rezervacijaID, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista, false, false), new Karta(new Projekcija(projekcijaID, null, null, null, null), kartaID, 0, null, null));
                 karteZaRezervisanaSedista.add(kzrs);
             }
         } catch (Exception e) {

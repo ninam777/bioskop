@@ -381,6 +381,12 @@ public class FormaRepertoar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnObrisiRezervacijuActionPerformed
 
     private void btnRezervisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRezervisiActionPerformed
+
+        ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
+        List<Film> filmovi = mtf.getLista();
+        Film f = filmovi.get(jtFilmovi.getSelectedRow());
+//        String nazivFilma = f.getNazivFilma();
+        Sesija.vratiInstancu().getMapa().put("film", f);
         new FormaRezervacijaKarata().setVisible(true);
     }//GEN-LAST:event_btnRezervisiActionPerformed
 
