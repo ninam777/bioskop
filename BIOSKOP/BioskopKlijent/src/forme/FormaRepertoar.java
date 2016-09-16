@@ -8,6 +8,8 @@ package forme;
 import domen.AbstractObjekat;
 import domen.Film;
 import domen.Rezervacija;
+import domen.Sala;
+import domen.Sediste;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -321,6 +323,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDodajFilmActionPerformed
 
     private void btnKupiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKupiActionPerformed
+        Sesija.vratiInstancu().getMapa().put("rezim", "bezrezervacije");
         ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
         List<Film> filmovi = mtf.getLista();
 
@@ -413,6 +416,7 @@ public class FormaRepertoar extends javax.swing.JFrame {
 
     private void btnKupiKarteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKupiKarteActionPerformed
 //        ModelTabeleFilm mtf = (ModelTabeleFilm) jtFilmovi.getModel();
+        Sesija.vratiInstancu().getMapa().put("rezim", "rezervacija");
         ModelTabeleRezervacija mtr = (ModelTabeleRezervacija) jtRezervacije.getModel();
         List<Rezervacija> rezervacije = mtr.getLista();
 
@@ -578,9 +582,42 @@ public class FormaRepertoar extends javax.swing.JFrame {
             Film f = (Film) ao;
             listaF.add(f);
         }
+        
+        ArrayList<Sala> listaSala = new ArrayList<>();
+        ArrayList<Integer> idevi = new ArrayList<>();
+        List<AbstractObjekat> sedista = new ArrayList<>();
+        sedista = k.vratiListuSedista();
+        
+        for (AbstractObjekat ao : sedista) {
+            Sediste s = (Sediste) ao;
+            Sala sala = s.getSala();
+            if (listaSala.isEmpty()) {
+                listaSala.add(sala);
+                idevi.add(sala.getSalaID());
+            } else {
+                if (!idevi.contains(sala.getSalaID())) {
+                    listaSala.add(sala);
+                    idevi.add(sala.getSalaID());
+                }
+            }
+
+        }
 
         for (AbstractObjekat ao : rezervacije) {
             Rezervacija r = (Rezervacija) ao;
+            System.out.println("rez "+ r);
+            for (Film f : listaF) {
+                if(f.getFilmID()==r.getProjekcija().getFilm().getFilmID()){
+                    r.getProjekcija().setFilm(f);
+                }
+            }
+            
+            for (Sala s : listaSala) {
+                if(s.getSalaID()==r.getProjekcija().getSala().getSalaID()){
+                    r.getProjekcija().setSala(s);
+                }
+            }
+            
             listaR.add(r);
         }
 

@@ -22,10 +22,12 @@ import so.SOPretraziRezervacije;
 import so.SOUcitajFilm;
 import so.SOUcitajListuProjekcija;
 import so.SOUcitajListuRadnika;
+import so.SOUcitajListuRezervisanihSedista;
 import so.SOUcitajListuSedista;
 import so.SOUcitajRezervaciju;
 import so.SOZapamtiFilm;
 import so.SOZapamtiKarte;
+import so.SOZapamtiKarteZaRezervisanoSediste;
 import so.SOZapamtiRezervaciju;
 
 public class Kontroler {
@@ -117,6 +119,12 @@ public class Kontroler {
         so.izvrsiOperaciju();
         return so.vratiSedista();
     }
+    
+    public static List<AbstractObjekat> ucitajRezervisanaSedista() throws Exception {
+        SOUcitajListuRezervisanihSedista so = new SOUcitajListuRezervisanihSedista();
+        so.izvrsiOperaciju();
+        return so.vratiRezervisanaSedista();
+    }
 
     public static void zapamtiFilm(List<AbstractObjekat> lista) throws Exception {
         AbstractObjekat f = lista.get(0);
@@ -130,6 +138,11 @@ public class Kontroler {
 
     public static void zapamtiKarte(List<AbstractObjekat> k) throws Exception {
         SOZapamtiKarte so = new SOZapamtiKarte(k);
+        so.izvrsiOperaciju();
+    }
+    
+    public static void zapamtiKarteZaRezervisanoSediste(List<AbstractObjekat> k) throws Exception {
+        SOZapamtiKarteZaRezervisanoSediste so = new SOZapamtiKarteZaRezervisanoSediste(k);
         so.izvrsiOperaciju();
     }
 

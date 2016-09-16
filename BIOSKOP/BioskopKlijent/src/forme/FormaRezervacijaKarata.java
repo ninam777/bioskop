@@ -130,6 +130,8 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
 
         cbProjekcija.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jtfNazivFilma.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

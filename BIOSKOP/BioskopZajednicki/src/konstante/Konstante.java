@@ -26,4 +26,6 @@ public class Konstante {
     public static final int OPERACIJA_KREIRAJ_NOVE_KARTE = 14;
     public static final int OPERACIJA_PRETRAZI_FILMOVE = 15;
     public static final int OPERACIJA_PRETRAZI_REZERVACIJE= 16;
+    public static final int OPERACIJA_SACUVAJ_KARTE_ZA_REZ_SED= 17;
+    public static final int OPERACIJA_VRATI_REZ_SEDISTA= 18;
 }

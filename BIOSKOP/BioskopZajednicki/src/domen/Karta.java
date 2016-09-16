@@ -92,7 +92,7 @@ public class Karta extends AbstractObjekat{
 
     @Override
     public String vratiPK() {
-        return "nema";
+        return "kartaID";
     }
 
     @Override

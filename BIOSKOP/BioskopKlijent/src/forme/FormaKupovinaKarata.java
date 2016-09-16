@@ -6,9 +6,13 @@
 package forme;
 
 import domen.AbstractObjekat;
+import domen.Film;
 import domen.Karta;
+import domen.KartaZaRezervisanoSediste;
 import domen.Projekcija;
 import domen.Radnik;
+import domen.Rezervacija;
+import domen.RezervisanoSediste;
 import domen.Sediste;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -74,6 +78,8 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         cbProjekcija = new javax.swing.JComboBox();
         jtfNazivFilma = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jtfNazivRezervacije = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Kupovina karata");
@@ -124,6 +130,14 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
 
         cbProjekcija.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jtfNazivFilma.setEditable(false);
+        jtfNazivFilma.setEnabled(false);
+
+        jLabel6.setText("Naziv rezervacije:");
+
+        jtfNazivRezervacije.setEditable(false);
+        jtfNazivRezervacije.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -131,16 +145,16 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPotvrdi)
+                        .addGap(36, 36, 36))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(90, 90, 90)
                         .addComponent(btnDodaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnObrisi))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPotvrdi)
-                        .addGap(26, 26, 26))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,20 +165,27 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel4))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(39, 39, 39)
+                                .addComponent(jtfNazivRezervacije, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbProjekcija, 0, 249, Short.MAX_VALUE)
-                                    .addComponent(jtfNazivFilma))))
-                        .addGap(0, 5, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jtfNazivFilma, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbProjekcija, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 15, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jtfNazivRezervacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jtfNazivFilma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,7 +193,7 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbProjekcija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(btnDodaj)
@@ -184,7 +205,7 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jtfCena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(50, 50, 50)
+                .addGap(18, 18, 18)
                 .addComponent(btnPotvrdi)
                 .addGap(59, 59, 59))
         );
@@ -210,7 +231,6 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
     }//GEN-LAST:event_btnObrisiActionPerformed
 
     private void btnPotvrdiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPotvrdiActionPerformed
-
         Projekcija projekcija = (Projekcija) cbProjekcija.getSelectedItem();
         Double cena = Double.parseDouble(jtfCena.getText().trim());
         Radnik radnik = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
@@ -224,25 +244,58 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
 
             List<Karta> karte = new ArrayList<>();
 
-            for (Sediste sediste : sedista) {
+            String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
+            if ("rezervacija".equals(rezim)) {
+                Rezervacija rez = (Rezervacija) Sesija.vratiInstancu().getMapa().get("rezervacija");
 
-                Karta karta = new Karta(projekcija, -1, cena, radnik, sediste);
-                karte.add(karta);
-            }
-
-            boolean uspesnost = false;
-
-            try {
-                uspesnost = k.sacuvajKarte(karte);
-                if (uspesnost == true) {
-                    JOptionPane.showMessageDialog(this, "Uspesno sacuvan film!", "Uspesno", INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Neuspesan unos filma", "Greska", ERROR_MESSAGE);
+                List<KartaZaRezervisanoSediste> karteZaRez = new ArrayList<>();
+                int id = 0;
+                for (Sediste sediste : sedista) {
+                    id += 1;
+                    Karta karta = new Karta(projekcija, id, cena, radnik, sediste);
+                    KartaZaRezervisanoSediste kzr = new KartaZaRezervisanoSediste(rez, sediste, karta);
+                    karte.add(karta);
+                    karteZaRez.add(kzr);
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
+
+                boolean uspesnost = false;
+                boolean uspesnost2 = false;
+
+                try {
+                    uspesnost = k.sacuvajKarte(karte);
+                    uspesnost2 = k.sacuvajKarteZaRervisanoSediste(karteZaRez);
+                    if (uspesnost == true && uspesnost2 == true) {
+                        JOptionPane.showMessageDialog(this, "Uspesno sacuvane karte!", "Uspesno", INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Neuspesan unos karata", "Greska", ERROR_MESSAGE);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+                int id = 0;
+                for (Sediste sediste : sedista) {
+                    id+=1;
+                    Karta karta = new Karta(projekcija, id, cena, radnik, sediste);
+                    karte.add(karta);
+                }
+
+                boolean uspesnost = false;
+
+                try {
+                    uspesnost = k.sacuvajKarte(karte);
+                    if (uspesnost == true) {
+                        JOptionPane.showMessageDialog(this, "Uspesno sacuvane karte!", "Uspesno", INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Neuspesan unos karata", "Greska", ERROR_MESSAGE);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
@@ -294,40 +347,88 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtRediSedista;
     private javax.swing.JTextField jtfCena;
     private javax.swing.JTextField jtfNazivFilma;
+    private javax.swing.JTextField jtfNazivRezervacije;
     // End of variables declaration//GEN-END:variables
 
     private void srediFormu() throws IOException, ClassNotFoundException {
+
         ModelTabeleRediSedista mtrs = new ModelTabeleRediSedista();
         jtRediSedista.setModel(mtrs);
-        List<AbstractObjekat> filmovi = new ArrayList<>();
-        filmovi = k.pretraziFilmove(jtfNazivFilma.getText().trim());
-
         List<AbstractObjekat> projekcije = new ArrayList<>();
         projekcije = k.vratiListuProjekcija();
 
-        List<AbstractObjekat> lista = new ArrayList<>();
+        List<Projekcija> lista = new ArrayList<>();
 
-        if (filmovi.isEmpty()) {
-            lista = projekcije;
-        } else {
+        String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
+        if ("rezervacija".equals(rezim)) {
+            Rezervacija rez = (Rezervacija) Sesija.vratiInstancu().getMapa().get("rezervacija");
+            jtfNazivFilma.setText(rez.getProjekcija().getFilm().getNazivFilma());
+            jtfNazivRezervacije.setText(rez.getNazivRezervacije());
+
             for (AbstractObjekat ao : projekcije) {
                 Projekcija p = (Projekcija) ao;
-                for (AbstractObjekat f : filmovi) {
-                    if (p.getFilm().equals(f)) {
-                        lista.add(p);
-                    }
+                if (p.getFilm().getFilmID() == rez.getProjekcija().getFilm().getFilmID()) {
+                    lista.add(p);
                 }
             }
-        }
 
-        cbProjekcija.removeAllItems();;
+            cbProjekcija.removeAllItems();;
 
-        for (AbstractObjekat ao : lista) {
-            cbProjekcija.addItem(ao);
+            for (AbstractObjekat ao : lista) {
+                cbProjekcija.addItem(ao);
+            }
+
+            cbProjekcija.setEditable(false);
+            cbProjekcija.setEnabled(false);
+
+            List<AbstractObjekat> listaRezSedista = k.vratiListuRezervisanihSedista();
+            ArrayList<Sediste> sedista = new ArrayList<>();
+            for (AbstractObjekat ao : listaRezSedista) {
+                RezervisanoSediste rs = (RezervisanoSediste) ao;
+                if (rs.getRezervacija().getRezervacijaID() == rez.getRezervacijaID()) {
+                    Sediste s = rs.getSediste();
+                    sedista.add(s);
+                }
+            }
+            mtrs.setLista(sedista);
+
+        } else {
+
+            Film film = (Film) Sesija.vratiInstancu().getMapa().get("film");
+            jtfNazivFilma.setText(film.getNazivFilma());
+            jtfNazivRezervacije.setText("");
+
+//        List<AbstractObjekat> filmovi = new ArrayList<>();
+//        filmovi = k.pretraziFilmove(jtfNazivFilma.getText().trim());
+//        if (filmovi.isEmpty()) {
+//            lista = projekcije;
+//        } else {
+//            for (AbstractObjekat ao : projekcije) {
+//                Projekcija p = (Projekcija) ao;
+//                for (AbstractObjekat f : filmovi) {
+//                    if (p.getFilm().equals(f)) {
+//                        lista.add(p);
+//                    }
+//                }
+//            }
+//        }
+            for (AbstractObjekat ao : projekcije) {
+                Projekcija p = (Projekcija) ao;
+                if (p.getFilm().getFilmID() == film.getFilmID()) {
+                    lista.add(p);
+                }
+            }
+
+            cbProjekcija.removeAllItems();;
+
+            for (AbstractObjekat ao : lista) {
+                cbProjekcija.addItem(ao);
+            }
         }
     }
 }
