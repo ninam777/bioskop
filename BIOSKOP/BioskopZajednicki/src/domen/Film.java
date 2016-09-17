@@ -171,7 +171,7 @@ public class Film extends AbstractObjekat{
                 + "',glumci='" + glumci
                 + "',opis='" + opis
                 + "',periodPrikazivanja='" + periodPrikazivanja
-                + "',radnik=" + getRadnik().getRadnikID() + "";
+                + "',radnikID=" + getRadnik().getRadnikID() + "";
     }
 
     @Override

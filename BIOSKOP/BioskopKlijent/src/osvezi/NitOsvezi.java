@@ -34,7 +34,7 @@ public class NitOsvezi extends Thread{
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(NitOsvezi.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println("Osvezio");
+//            System.out.println("Osvezio");
             try {
                 sleep(10000);
             } catch (InterruptedException ex) {

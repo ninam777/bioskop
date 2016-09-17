@@ -54,7 +54,8 @@ public class Sala extends AbstractObjekat{
 
     @Override
     public String toString() {
-        return "Sala{" + "salaID=" + salaID + ", nazivSale=" + nazivSale + ", kapacitet=" + kapacitet + '}';
+//        return "Sala{" + "salaID=" + salaID + ", nazivSale=" + nazivSale + ", kapacitet=" + kapacitet + '}';
+        return nazivSale;
     }
     
     @Override

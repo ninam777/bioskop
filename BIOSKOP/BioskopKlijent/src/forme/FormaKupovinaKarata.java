@@ -13,6 +13,7 @@ import domen.Projekcija;
 import domen.Radnik;
 import domen.Rezervacija;
 import domen.RezervisanoSediste;
+import domen.Sala;
 import domen.Sediste;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +39,6 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
      * Creates new form KupovinaKarata
      */
     public FormaKupovinaKarata(java.awt.Frame parent, boolean modal) {
-//        super(parent, modal);
         Sesija.vratiInstancu().getMapa().put("nacin", "unos");
         initComponents();
     }
@@ -244,13 +244,23 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
 
             List<Karta> karte = new ArrayList<>();
 
+            int id = 0;
+            try {
+                id = k.kreirajNoveKarte();
+            } catch (IOException ex) {
+                Logger.getLogger(FormaKupovinaKarata.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FormaKupovinaKarata.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
             if ("rezervacija".equals(rezim)) {
                 Rezervacija rez = (Rezervacija) Sesija.vratiInstancu().getMapa().get("rezervacija");
 
                 List<KartaZaRezervisanoSediste> karteZaRez = new ArrayList<>();
-                int id = 0;
                 for (Sediste sediste : sedista) {
+//                    Sala s = projekcija.getSala();
+//                    sediste.setSala(s);
                     id += 1;
                     Karta karta = new Karta(projekcija, id, cena, radnik, sediste);
                     KartaZaRezervisanoSediste kzr = new KartaZaRezervisanoSediste(rez, sediste, karta);
@@ -275,9 +285,10 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
                     Logger.getLogger(FormaRezervacijaKarata.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } else {
-                int id = 0;
                 for (Sediste sediste : sedista) {
-                    id+=1;
+                    Sala s = projekcija.getSala();
+                    sediste.setSala(s);
+                    id += 1;
                     Karta karta = new Karta(projekcija, id, cena, radnik, sediste);
                     karte.add(karta);
                 }
@@ -298,7 +309,7 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
                 }
             }
         }
-
+        this.dispose();
     }//GEN-LAST:event_btnPotvrdiActionPerformed
 
     /**
@@ -403,20 +414,6 @@ public class FormaKupovinaKarata extends javax.swing.JFrame {
             jtfNazivFilma.setText(film.getNazivFilma());
             jtfNazivRezervacije.setText("");
 
-//        List<AbstractObjekat> filmovi = new ArrayList<>();
-//        filmovi = k.pretraziFilmove(jtfNazivFilma.getText().trim());
-//        if (filmovi.isEmpty()) {
-//            lista = projekcije;
-//        } else {
-//            for (AbstractObjekat ao : projekcije) {
-//                Projekcija p = (Projekcija) ao;
-//                for (AbstractObjekat f : filmovi) {
-//                    if (p.getFilm().equals(f)) {
-//                        lista.add(p);
-//                    }
-//                }
-//            }
-//        }
             for (AbstractObjekat ao : projekcije) {
                 Projekcija p = (Projekcija) ao;
                 if (p.getFilm().getFilmID() == film.getFilmID()) {

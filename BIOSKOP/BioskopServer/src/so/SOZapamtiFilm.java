@@ -31,15 +31,18 @@ public class SOZapamtiFilm extends AbstractSO {
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
+//            Film f = (Film) film;
+//            int id = Kontroler.vratiMaxFilm(f);
+//            f.setFilmID(id + 1);
             db.sacuvajIliAzurirajObjekat(film);
-            Film f = (Film) film;
-            int id = Kontroler.vratiMaxFilm(f);
-            f.setFilmID(id + 1);
+//            for (AbstractObjekat ao : projekcije) {
+//                Projekcija p = (Projekcija) ao;
+//                p.setFilm(f);
+//            }
             for (AbstractObjekat ao : projekcije) {
-                Projekcija p = (Projekcija) ao;
-                p.setFilm(f);
+                db.sacuvajIliAzurirajObjekat(ao);
             }
-            db.sacuvajObjekte(projekcije);
+//            db.sacuvajObjekte(projekcije);
         } catch (SQLException ex) {
             Logger.getLogger(SOZapamtiFilm.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -150,7 +150,8 @@ public class DBBroker {
     public AbstractObjekat obrisiObjekat(AbstractObjekat o) throws Exception {
         String upit = "";
 
-        if (o.vratiPK() != null) {
+//        if (o.vratiPK() != null) {
+        if (o.vratiVrednostPK() != -1) {
             upit = "DELETE FROM " + o.vratiImeTabele() + " WHERE " + o.vratiPK() + "=" + o.vratiVrednostPK();
 
         } else {
@@ -173,9 +174,26 @@ public class DBBroker {
 
     public AbstractObjekat sacuvajIliAzurirajObjekat(AbstractObjekat o) throws SQLException {
         List<AbstractObjekat> lista = vratiSveObjekte(o);
+        boolean found = false;
+        boolean slozenKljuc = false;
+        for (AbstractObjekat ao : lista) {
+//            if(a.getPrimaryKeyValue() == o.getPrimaryKeyValue()){
+//            System.out.println("vrednost pk "+ ao.vratiVrednostPK() + " *** "+ o.vratiVrednostPK());
+            if (o.vratiVrednostPK() == -1) {
+                slozenKljuc = true;
+            } else if (ao.vratiVrednostPK() == o.vratiVrednostPK()) {
+                found = true;
+            }
+        }
+        if (slozenKljuc) {
+            if (lista.contains(o)) {
+                found = true;
+            }
+        }
         System.out.println("USAO u sacuvaj ili azuriraj");
         String upit = "";
-        if (!lista.contains(o)) {
+//        if (!lista.contains(o)) {
+        if (!found) {
             upit = "INSERT INTO " + o.vratiImeTabele() + " VALUES (" + o.vratiParametre() + ")";
             System.out.println("1.UPIT: " + upit);
         } else {

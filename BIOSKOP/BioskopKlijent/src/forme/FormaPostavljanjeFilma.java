@@ -40,7 +40,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
      * Creates new form FormaPostavljanjeFilma
      */
     public FormaPostavljanjeFilma(java.awt.Frame parent, boolean modal) {
-//        super(parent, modal);
         Sesija.vratiInstancu().getMapa().put("nacin", "prikaz");
         initComponents();
     }
@@ -311,17 +310,21 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         if ("izmena".equals(rezim)) {
 
             Film film = uzmiPodatkeOFilmu();
-//            Klijent klijent = uzmiPodatkeOKlijentu();
+            Film f = (Film) Sesija.vratiInstancu().getMapa().get("film");
+            film.setFilmID(f.getFilmID());
             List<Projekcija> lp = uzmiPodatkeOProjekcijama();
-//
+
+            for (Projekcija p : lp) {
+                p.setFilm(f);
+            }
 
             if (film != null) {
                 try {
                     boolean uspesnost = k.sacuvajFilm(film, lp);
                     if (uspesnost) {
-                        JOptionPane.showMessageDialog(this, "Uspesno sacuvan klijent", "Uspesno", INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Uspesno izmenjen film", "Uspesno", INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(this, "Neuspesan unos klijenta", "Greska", ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Neuspesna izmena filma", "Greska", ERROR_MESSAGE);
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
@@ -329,108 +332,72 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
                     Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-//            try {
-//                if (klijent != null) {
-//                    boolean uspesnost = k.sacuvajKlijenta(klijent);
-//                    if (uspesnost) {
-//                        JOptionPane.showMessageDialog(this, "Uspesno sacuvan klijent", "Uspesno", INFORMATION_MESSAGE);
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Neuspesan unos klijenta", "Greska", ERROR_MESSAGE);
-//                    }
-//                } else {
-//
-//                }
-//
-//            } catch (IOException ex) {
-//                Logger.getLogger(FKlijent.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (ClassNotFoundException ex) {
-//                Logger.getLogger(FKlijent.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
         } else {
-//            String id = jtfID.getText().trim(); // ovo polje je izbrisano, pogledaj da li ima jos negde, pa izbrisi
-            String nazivFilma = jtfNazivFilma.getText().trim();
-            String zanr = jtfZanrFilma.getText().trim();
-            int trajanje = Integer.parseInt(jtfVremeTrajanjaFilma.getText().trim());
-            String reziser = jtfReziser.getText().trim();
-            String glumci = jtfGlumci.getText().trim();
-            String opis = jtaSadrzaj.getText().trim();
-            String p1 = jtfPeriodPrikazivanjaOd.getText().trim();
-            String p2 = jtfPeriodPrikazivanjaDo.getText().trim();
-            String periodprikazivanja = p1 + " - " + p2;
+            int id = 0;
+            try {
+                id = k.kreirajNoviFilm();
+            } catch (IOException ex) {
+                Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-//            Sluzbenik sl = (Sluzbenik) Sesija.vratiInstancu().getMapa().get("sluzbenik");
-            Radnik radnik = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
-
-            Film f = new Film(0, nazivFilma, zanr, trajanje, reziser, glumci, opis, periodprikazivanja, radnik);
+            Film f = uzmiPodatkeOFilmu();
+            f.setFilmID(id+1);
             ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
 
 //            List<AbstractObjekat> lista = mtvp.getLista();
-            if (mtvp.getLista().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Niste uneli klijenta.");
-            } else {
-                List<Projekcija> projekcije = mtvp.getLista();
+//            if (mtvp.getLista().isEmpty()) {
+//                JOptionPane.showMessageDialog(this, "Niste uneli projekcije.");
+//            } else {
+//                List<Projekcija> projekcije = mtvp.getLista();
+//                for (Projekcija p : projekcije) {
+//                    p.setFilm(f);
+//                }
+//                if (!projekcije.isEmpty()) {
+//                    boolean uspesnost;
+//
+//                    try {
+//                        uspesnost = k.sacuvajFilm(f, projekcije);
+//                        if (uspesnost == true) {
+//                            JOptionPane.showMessageDialog(this, "Uspesno sacuvan film!", "Uspesno", INFORMATION_MESSAGE);
+//                        } else {
+//                            JOptionPane.showMessageDialog(this, "Neuspesan unos filma", "Greska", ERROR_MESSAGE);
+//                        }
+//                    } catch (IOException ex) {
+//                        Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+//                    } catch (ClassNotFoundException ex) {
+//                        Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                } else {
+//                    JOptionPane.showMessageDialog(this, "Neuspesan unos projekcija", "Greska", ERROR_MESSAGE);
+//                }
+//            }
+            List<Projekcija> projekcije = new ArrayList<>();
+            if (!mtvp.getLista().isEmpty()) {
+                projekcije = mtvp.getLista();
+
                 for (Projekcija p : projekcije) {
                     p.setFilm(f);
                 }
-                if (!projekcije.isEmpty()) {
-                    boolean uspesnost;
+            }
+            boolean uspesnost;
 
-                    try {
-                        uspesnost = k.sacuvajFilm(f, projekcije);
-                        if (uspesnost == true) {
-                            JOptionPane.showMessageDialog(this, "Uspesno sacuvan film!", "Uspesno", INFORMATION_MESSAGE);
-                        } else {
-                            JOptionPane.showMessageDialog(this, "Neuspesan unos filma", "Greska", ERROR_MESSAGE);
-                        }
-                    } catch (IOException ex) {
-                        Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            try {
+                uspesnost = k.sacuvajFilm(f, projekcije);
+                if (uspesnost == true) {
+                    JOptionPane.showMessageDialog(this, "Uspesno sacuvan film!", "Uspesno", INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Neuspesan unos klijenata", "Greska", ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Neuspesan unos filma", "Greska", ERROR_MESSAGE);
                 }
+            } catch (IOException ex) {
+                Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-//            ModelTabeleKlijent mtk = (ModelTabeleKlijent) jtblUnos.getModel();
-//            if (mtk.getKlijenti().isEmpty()) {
-//                JOptionPane.showMessageDialog(this, "Niste uneli klijenta.");
-//            } else {
-//                List<Klijent> klijenti = mtk.getKlijenti();
-//                for (Klijent klj : klijenti) {
-//                    System.out.println(klj);
-//                }
-//                try {
-//                    if (!klijenti.isEmpty()) {
-//                        boolean uspesnost;
-//
-//                        uspesnost = k.sacuvajKlijente(klijenti);
-//
-//                        if (uspesnost == true) {
-//                            JOptionPane.showMessageDialog(this, "Uspesno sacuvani klijenti!", "Uspesno", INFORMATION_MESSAGE);
-//                        } else {
-//                            JOptionPane.showMessageDialog(this, "Neuspesan unos klijenata", "Greska", ERROR_MESSAGE);
-//                        }
-//                        new FKlijentPrikaz().setVisible(true);
-//                        try {
-//                            srediFormu();
-//                        } catch (IOException ex) {
-//                        } catch (ClassNotFoundException ex) {
-//                        }
-//
-//                        this.dispose();
-//                    } else {
-//                        JOptionPane.showMessageDialog(this, "Neuspesan unos klijenata", "Greska", ERROR_MESSAGE);
-//                    }
-//                } catch (IOException ex) {
-//                    Logger.getLogger(FKlijent.class.getName()).log(Level.SEVERE, null, ex);
-//                } catch (ClassNotFoundException ex) {
-//                    Logger.getLogger(FKlijent.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//
         }
+        this.dispose();
     }//GEN-LAST:event_btnSacuvajFilmActionPerformed
 
     /**
@@ -497,20 +464,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void popuniCBuTabeli() throws IOException, ClassNotFoundException {
-
-        String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
-
-//        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
-//        if ("izmena".equals(rezim)) {
-//            
-//            //TODO: uradi ovde kako da se vraca kombo boks :)
-//        } else {
-//
-//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-//        }
-//        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
-//        List<AbstractObjekat> projekcije = new ArrayList<>();
-//        projekcije = k.vratiListuProjekcija();
         ArrayList<Sala> listaSala = new ArrayList<>();
         ArrayList<Integer> idevi = new ArrayList<>();
         List<AbstractObjekat> sedista = new ArrayList<>();
@@ -518,17 +471,10 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 
         JComboBox kombo = new JComboBox();
         kombo.removeAllItems();
-//        for (AbstractObjekat ao : projekcije) {
-//            Projekcija p = (Projekcija) ao;
-//            kombo.addItem(p.getSala().getNazivSale());
-//        }
-//        System.out.println("Sedista "+sedista);
+        
         for (AbstractObjekat ao : sedista) {
             Sediste s = (Sediste) ao;
-//            System.out.println("Nesto "+s);
             Sala sala = s.getSala();
-//            System.out.println("sala "+ sala);
-//            System.out.println("provera "+listaSala.contains(sala));
             if (listaSala.isEmpty()) {
                 listaSala.add(sala);
                 idevi.add(sala.getSalaID());
@@ -538,40 +484,14 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
                     idevi.add(sala.getSalaID());
                 }
             }
-
         }
 
         for (Sala sala : listaSala) {
 //            kombo.addItem(sala.getNazivSale());
             kombo.addItem(sala);
         }
-//        System.out.println("Lista sala " + listaSala);
-
-//        if ("izmena".equals(rezim)) {
-//            ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
-//            jtVremenaProjekcija.setModel(mtvp);
-//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-//            System.out.println("lista sala 1" + listaSala);
-//            mtvp.setListaSala(listaSala);
-//            System.out.println("lista sala 2" + listaSala);
-            
-            
-//            int red = jtVremenaProjekcija.getSelectedRow();
-//
-//            if (red == -1) {
-////                JOptionPane.showMessageDialog(this, "Odaberite red");
-//                red = 0;
-//            } else {
-////                red = 0;
-//            }
-//            Sala s = (Sala) jtVremenaProjekcija.getValueAt(red, 0);
-//            //TODO: uradi ovde kako da se vraca kombo boks :)
-//            System.out.println("Proslo");
-//        } else {
-        
-            ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-            mtvp.setListaSala(listaSala);
-//        }
+        ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
+        mtvp.setListaSala(listaSala);
 
         TableColumnModel tcm = jtVremenaProjekcija.getColumnModel();
         TableColumn kolona = tcm.getColumn(0);
@@ -580,7 +500,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
     }
 
     private Film uzmiPodatkeOFilmu() {
-//        String id = jtfID.getText().trim();
         String nazivFilma = jtfNazivFilma.getText().trim();
         String zanr = jtfZanrFilma.getText().trim();
         int trajanje = Integer.parseInt(jtfVremeTrajanjaFilma.getText().trim());
@@ -590,18 +509,16 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         String p1 = jtfPeriodPrikazivanjaOd.getText().trim();
         String p2 = jtfPeriodPrikazivanjaDo.getText().trim();
         String periodprikazivanja = p1 + " - " + p2;
-
-//            Sluzbenik sl = (Sluzbenik) Sesija.vratiInstancu().getMapa().get("sluzbenik");
+        
         Radnik radnik = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
 
-        Film f = new Film(-1, nazivFilma, zanr, trajanje, reziser, glumci, opis, periodprikazivanja, radnik);
+        Film f = new Film(0, nazivFilma, zanr, trajanje, reziser, glumci, opis, periodprikazivanja, radnik);
 
         return f;
     }
 
     private List<Projekcija> uzmiPodatkeOProjekcijama() {
-
-        ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
+        ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
         List<Projekcija> lista = mtvp.getLista();
 
         return lista;
@@ -611,14 +528,9 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
         ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
         if ("izmena".equals(rezim)) {
-//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
             Film f = (Film) Sesija.vratiInstancu().getMapa().get("film");
             prikaziFilm(f);
-//            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-//            prikaziKlijenta((Klijent) Sesija.vratiInstancu().getMapa().get("klijent"));
-//
-//            jbtnDodaj.setVisible(false);
-//            jbtnUkloni.setVisible(false);
+
             ArrayList<Projekcija> lista = new ArrayList<>();
             try {
                 List<AbstractObjekat> projekcije = k.vratiListuProjekcija();
@@ -639,24 +551,8 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
             mtvp.setLista(lista);
 
         } else {
-
-//            try {
-//                srediTabelu();
-//            } catch (Exception ex) {
-//
-//            }
-//
-////            jbtnObrisi.setVisible(false);
             ocistiPolja();
-
         }
-//        try {
-//            popuniCBuTabeli();
-//        } catch (IOException ex) {
-//            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
-//        }
         jtVremenaProjekcija.setModel(mtvp);
     }
 
@@ -681,10 +577,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         String[] period = film.getPeriodPrikazivanja().split("-");
         String odp = period[0];
         String dop = period[1];
-//        int ind = film.getPeriodPrikazivanja().indexOf("-");
-//        String od = film.getPeriodPrikazivanja().substring(0, ind);
-//        String dop = film.getPeriodPrikazivanja().substring(ind);
-
         jtfPeriodPrikazivanjaOd.setText(odp);
         jtfPeriodPrikazivanjaDo.setText(dop);
 
@@ -692,7 +584,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 
     private void srediTabeluUrezimuIzmena() {
         String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
-        
+
         if ("izmena".equals(rezim)) {
             ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
             jtVremenaProjekcija.setModel(mtvp);
@@ -700,8 +592,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 //            System.out.println("lista sala 1" + listaSala);
 //            mtvp.setListaSala(listaSala);
 //            System.out.println("lista sala 2" + listaSala);
-            
-            
+
 //            int red = jtVremenaProjekcija.getSelectedRow();
 //
 //            if (red == -1) {
@@ -714,11 +605,10 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 //            //TODO: uradi ovde kako da se vraca kombo boks :)
 //            System.out.println("Proslo");
 //        } else {
-        
 //            ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
 //            mtvp.setListaSala(listaSala);
         }
-        
+
         try {
             popuniCBuTabeli();
         } catch (IOException ex) {

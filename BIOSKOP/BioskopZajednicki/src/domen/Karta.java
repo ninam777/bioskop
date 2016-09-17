@@ -97,7 +97,7 @@ public class Karta extends AbstractObjekat{
 
     @Override
     public int vratiVrednostPK() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return -1;
     }
 
     @Override

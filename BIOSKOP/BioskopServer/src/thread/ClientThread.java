@@ -8,6 +8,7 @@ package thread;
 import com.sun.corba.se.spi.activation.Server;
 import domen.AbstractObjekat;
 import domen.Film;
+import domen.Karta;
 import domen.Radnik;
 import domen.Rezervacija;
 
@@ -296,7 +297,7 @@ public class ClientThread extends Thread {
                 if (operacija == Konstante.OPERACIJA_KREIRAJ_NOVE_KARTE) {
                     ServerskiTransferObjekat st = new ServerskiTransferObjekat();
                    try {
-                        AbstractObjekat ao = new Rezervacija();
+                        AbstractObjekat ao = new Karta();
                         int karta = Kontroler.vratiMaxNoveKarte(ao);
                         st.setUspesnostIzvrsenjaOperacije(1);
                         st.setPodaci(karta);

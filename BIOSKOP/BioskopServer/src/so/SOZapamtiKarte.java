@@ -28,16 +28,6 @@ public class SOZapamtiKarte extends AbstractSO {
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
-//            Rezervacija r = (Rezervacija) rezervacija;
-//            int id = Kontroler.vratiMaxRezervacija(r);
-//            r.setRezervacijaID(id+1);
-//            rezervacija = r;
-//            for (AbstractObjekat ao : listaRezSedista) {
-//                RezervisanoSediste rs = (RezervisanoSediste) ao;
-//                rs.setRezervacija(r);
-//            }
-//            db.sacuvajObjekat(rezervacija);
-//            db.sacuvajObjekte(listaRezSedista);
 //            for (AbstractObjekat ao : karte) {
 //                Karta k = (Karta) ao;
 //                int id = Kontroler.vratiMaxNoveKarte(k);

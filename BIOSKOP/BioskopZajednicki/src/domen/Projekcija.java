@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import parsers.DateParser;
 
 /**
  *
@@ -75,7 +76,8 @@ public class Projekcija extends AbstractObjekat{
 
     @Override
     public String toString() {
-        return "Projekcija{" + "projekcijaID=" + projekcijaID + ", datum=" + datum + ", vreme=" + vreme + ", film=" + film + ", sala=" + sala + '}';
+//        return "Projekcija{" + "projekcijaID=" + projekcijaID + ", datum=" + datum + ", vreme=" + vreme + ", film=" + film + ", sala=" + sala + '}';
+        return sala + " datuma: " + datum + " i vremena: " + vreme;
     }
     
     @Override
@@ -85,7 +87,6 @@ public class Projekcija extends AbstractObjekat{
 
     @Override
     public String vratiParametre() {
-//        ps.setDate(3, new Date(proj.getDatumOd().getTime()));
         return projekcijaID + ", '" + new java.sql.Date(datum.getTime()) + "', '" + new java.sql.Time(vreme.getTime()) + "', " + getFilm().getFilmID() + ", " + getSala().getSalaID()+ "" ;
     }
 
@@ -106,10 +107,15 @@ public class Projekcija extends AbstractObjekat{
             while (rs.next()) {
                 int projekcijaID = rs.getInt("projekcijaID");
                 Date datum = rs.getDate("datum");
+//                String datum = rs.getString("datum");
                 Date vreme = rs.getDate("vreme");
+//                String vreme = rs.getString("vreme");
                 int filmID = rs.getInt("filmID");
                 int salaID = rs.getInt("salaID");
-                Projekcija p = new Projekcija(projekcijaID, datum, vreme, new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
+                Date dv = new Date(datum.getTime()+vreme.getTime());
+//                Projekcija p = new Projekcija(projekcijaID, DateParser.izSqlDatumaString(DateParser.izSqlDatuma(datum)), vreme, new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
+//                Projekcija p = new Projekcija(projekcijaID, datum, DateParser.izSqlVremenaString(vreme), new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
+                Projekcija p = new Projekcija(projekcijaID, datum, dv, new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
                 projekcije.add(p);
             }
         } catch (Exception e) {
@@ -121,8 +127,8 @@ public class Projekcija extends AbstractObjekat{
     @Override
     public String vratiUpdateUpit() {
         return "projekcijaID=" + projekcijaID
-                + ",datum='" + datum
-                + "',vreme='" + vreme
+                + ",datum='" + new java.sql.Date(datum.getTime())
+                + "',vreme='" + new java.sql.Time(vreme.getTime())
                 + "',filmID=" + getFilm().getFilmID()
                 + ",salaID=" + getSala().getSalaID() + "";
     }
