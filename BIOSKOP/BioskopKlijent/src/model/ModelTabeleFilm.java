@@ -58,7 +58,6 @@ public class ModelTabeleFilm extends AbstractTableModel {
         }
 
     }
-//  TODO: namesti imena kolona
     String[] kolone = {"ID filma","Naziv filma", "Žanr", "Trajanje", "Režiser", "Glumci", "Opis"};
 
     @Override
@@ -68,17 +67,14 @@ public class ModelTabeleFilm extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-//        TODO: ukoliko zelimo da zabranimo promenu neke kolone ili polja u tabeli
 //        if (columnIndex == 0) {
 //            return false;
 //        }
-
         return true;
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        //        TODO: Zameni Object za agregaciju
         Film f = lista.get(rowIndex);
 
         switch (columnIndex) {
@@ -103,23 +99,19 @@ public class ModelTabeleFilm extends AbstractTableModel {
             case 6:
                 f.setOpis((String) aValue);
                 break;
-
         }
     }
 
-//        TODO: Zameni Object za agregaciju
     public ArrayList<Film> getLista() {
         return lista;
     }
 
-//        TODO: Zameni Object za agregaciju
     public void setLista(ArrayList<Film> lista) {
         this.lista = lista;
         fireTableDataChanged();
     }
 
     public void dodajRed() {
-//        TODO: Zameni Object za agregaciju
         lista.add(new Film());
         fireTableDataChanged();
     }
@@ -133,5 +125,4 @@ public class ModelTabeleFilm extends AbstractTableModel {
         lista = new ArrayList<>();
         fireTableDataChanged();
     }
-
 }

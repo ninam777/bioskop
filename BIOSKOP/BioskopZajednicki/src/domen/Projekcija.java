@@ -5,12 +5,11 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import parsers.DateParser;
 
 /**
  *
@@ -76,8 +75,7 @@ public class Projekcija extends AbstractObjekat{
 
     @Override
     public String toString() {
-//        return "Projekcija{" + "projekcijaID=" + projekcijaID + ", datum=" + datum + ", vreme=" + vreme + ", film=" + film + ", sala=" + sala + '}';
-        return sala + " datuma: " + datum + " i vremena: " + vreme;
+        return sala + " " + datum + " u " + vreme;
     }
     
     @Override
@@ -107,15 +105,10 @@ public class Projekcija extends AbstractObjekat{
             while (rs.next()) {
                 int projekcijaID = rs.getInt("projekcijaID");
                 Date datum = rs.getDate("datum");
-//                String datum = rs.getString("datum");
-                Date vreme = rs.getDate("vreme");
-//                String vreme = rs.getString("vreme");
+                Time vreme = rs.getTime("vreme");
                 int filmID = rs.getInt("filmID");
                 int salaID = rs.getInt("salaID");
-                Date dv = new Date(datum.getTime()+vreme.getTime());
-//                Projekcija p = new Projekcija(projekcijaID, DateParser.izSqlDatumaString(DateParser.izSqlDatuma(datum)), vreme, new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
-//                Projekcija p = new Projekcija(projekcijaID, datum, DateParser.izSqlVremenaString(vreme), new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
-                Projekcija p = new Projekcija(projekcijaID, datum, dv, new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
+                Projekcija p = new Projekcija(projekcijaID, datum, vreme, new Film(filmID, null, null, 0, null, null, null, null, null), new Sala(salaID, null, 0));
                 projekcije.add(p);
             }
         } catch (Exception e) {
@@ -137,5 +130,4 @@ public class Projekcija extends AbstractObjekat{
     public String vratiSlozenPK() {
         return "Nema";
     }
-
 }

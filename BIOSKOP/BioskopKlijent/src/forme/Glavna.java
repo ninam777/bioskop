@@ -28,13 +28,9 @@ public class Glavna extends javax.swing.JFrame {
         initComponents();
         k = new Kontroler();
         new KlijentStart().start();
-//        Sluzbenik ulogovani = (Sluzbenik) Sesija.vratiInstancu().getMapa().get("sluzbenik");
         Radnik ulogovani = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
         if (ulogovani != null) {
-//            jMenuBar1.setVisible(true);
             new FormaRepertoar().setVisible(true);
-        } else {
-//            jMenuBar1.setVisible(false);
         }
     }
 
@@ -112,32 +108,6 @@ public class Glavna extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPrijavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrijavaActionPerformed
-        // TODO add your handling code here:
-//        String username = jtxtUsername.getText().trim();
-//        String password = jtxtPassword.getText().trim();
-//        Sluzbenik s = new Sluzbenik(0, "", "", username, password);
-//        try {
-//            Sluzbenik ulogovani  = k.prijaviKorisnika(s);
-//            if(ulogovani!=null){
-//                Sesija.vratiInstancu().getMapa().put("sluzbenik", ulogovani);
-//                jtxtPassword.setText("");
-//                jtxtUsername.setText("");
-//                jtxtPassword.setVisible(false);
-//                jtxtUsername.setVisible(false);
-//                jLabel1.setVisible(false);
-//                jLabel2.setVisible(false);
-//                jlblStatus.setText("Sluzbenik je uspesno prijavljen.");
-//                jMenuBar1.setVisible(true);
-//                jbtnPrijaviSe.setVisible(false);
-//            } else {
-//                jlblStatus.setText("Sistem ne moze da pronadje sluzbenika.");
-//            }
-//        } catch (IOException ex) {
-//            Logger.getLogger(Glavna.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(Glavna.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
         String korisnickoIme = jtfIme.getText().trim();
         String sifra = jtfSifra.getText().trim();
         Radnik r = new Radnik(0, "", "", korisnickoIme, sifra);

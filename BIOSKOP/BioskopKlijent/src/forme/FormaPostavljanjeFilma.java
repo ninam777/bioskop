@@ -49,6 +49,13 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         initComponents();
         k = new Kontroler();
         srediFormu();
+        try {
+            popuniCBuTabeli();
+        } catch (IOException ex) {
+            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -343,7 +350,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
             }
 
             Film f = uzmiPodatkeOFilmu();
-            f.setFilmID(id+1);
+            f.setFilmID(id + 1);
             ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
 
 //            List<AbstractObjekat> lista = mtvp.getLista();
@@ -471,7 +478,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
 
         JComboBox kombo = new JComboBox();
         kombo.removeAllItems();
-        
+
         for (AbstractObjekat ao : sedista) {
             Sediste s = (Sediste) ao;
             Sala sala = s.getSala();
@@ -487,7 +494,6 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         }
 
         for (Sala sala : listaSala) {
-//            kombo.addItem(sala.getNazivSale());
             kombo.addItem(sala);
         }
         ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
@@ -509,7 +515,7 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         String p1 = jtfPeriodPrikazivanjaOd.getText().trim();
         String p2 = jtfPeriodPrikazivanjaDo.getText().trim();
         String periodprikazivanja = p1 + " - " + p2;
-        
+
         Radnik radnik = (Radnik) Sesija.vratiInstancu().getMapa().get("radnik");
 
         Film f = new Film(0, nazivFilma, zanr, trajanje, reziser, glumci, opis, periodprikazivanja, radnik);
@@ -541,15 +547,12 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
                         lista.add(p);
                     }
                 }
-                srediTabeluUrezimuIzmena();
-//                popuniCBuTabeli();
             } catch (IOException ex) {
                 Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
             }
             mtvp.setLista(lista);
-
         } else {
             ocistiPolja();
         }
@@ -580,41 +583,5 @@ public class FormaPostavljanjeFilma extends javax.swing.JFrame {
         jtfPeriodPrikazivanjaOd.setText(odp);
         jtfPeriodPrikazivanjaDo.setText(dop);
 
-    }
-
-    private void srediTabeluUrezimuIzmena() {
-        String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
-
-        if ("izmena".equals(rezim)) {
-            ModelTabeleVremenaProjekcija mtvp = new ModelTabeleVremenaProjekcija();
-            jtVremenaProjekcija.setModel(mtvp);
-            mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-//            System.out.println("lista sala 1" + listaSala);
-//            mtvp.setListaSala(listaSala);
-//            System.out.println("lista sala 2" + listaSala);
-
-//            int red = jtVremenaProjekcija.getSelectedRow();
-//
-//            if (red == -1) {
-////                JOptionPane.showMessageDialog(this, "Odaberite red");
-//                red = 0;
-//            } else {
-////                red = 0;
-//            }
-//            Sala s = (Sala) jtVremenaProjekcija.getValueAt(red, 0);
-//            //TODO: uradi ovde kako da se vraca kombo boks :)
-//            System.out.println("Proslo");
-//        } else {
-//            ModelTabeleVremenaProjekcija mtvp = (ModelTabeleVremenaProjekcija) jtVremenaProjekcija.getModel();
-//            mtvp.setListaSala(listaSala);
-        }
-
-        try {
-            popuniCBuTabeli();
-        } catch (IOException ex) {
-            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FormaPostavljanjeFilma.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }

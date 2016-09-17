@@ -5,7 +5,6 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -129,5 +128,4 @@ public class Radnik extends AbstractObjekat{
     public String vratiSlozenPK() {
         return "Nema";
     }
-
 }

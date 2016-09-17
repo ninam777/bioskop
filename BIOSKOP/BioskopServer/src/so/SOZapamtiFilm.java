@@ -6,13 +6,10 @@
 package so;
 
 import domen.AbstractObjekat;
-import domen.Film;
-import domen.Projekcija;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import kontroler.Kontroler;
 
 /**
  *
@@ -31,18 +28,10 @@ public class SOZapamtiFilm extends AbstractSO {
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
-//            Film f = (Film) film;
-//            int id = Kontroler.vratiMaxFilm(f);
-//            f.setFilmID(id + 1);
             db.sacuvajIliAzurirajObjekat(film);
-//            for (AbstractObjekat ao : projekcije) {
-//                Projekcija p = (Projekcija) ao;
-//                p.setFilm(f);
-//            }
             for (AbstractObjekat ao : projekcije) {
                 db.sacuvajIliAzurirajObjekat(ao);
             }
-//            db.sacuvajObjekte(projekcije);
         } catch (SQLException ex) {
             Logger.getLogger(SOZapamtiFilm.class.getName()).log(Level.SEVERE, null, ex);
         }

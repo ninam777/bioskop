@@ -44,13 +44,11 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-//        TODO: promeni broj kolona sa brojem kolona u tabeli klijenta
         return 3;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-//        TODO: Zameni Object za agregaciju
         Projekcija p = lista.get(rowIndex);
 
         switch (columnIndex) {
@@ -65,7 +63,7 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
                 if (p.getVreme() == null) {
                     return "";
                 }
-                return new SimpleDateFormat("hh:mm:ss").format(p.getVreme());
+                return new SimpleDateFormat("HH:mm:ss").format(p.getVreme());
             default:
                 return "N/A";
         }
@@ -80,37 +78,25 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-//        TODO: ukoliko zelimo da zabranimo promenu neke kolone ili polja u tabeli
 //        if (columnIndex == 0) {
 //            return false;
 //        }
-
         return true;
     }
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        //        TODO: Zameni Object za agregaciju
         Projekcija p = lista.get(rowIndex);
         String rezim = (String) Sesija.vratiInstancu().getMapa().get("rezim");
         switch (columnIndex) {
             case 0:
-//                if ("izmena".equals(rezim)) {
-//                    System.out.println("aval " + aValue);
-//                    Sala sala = (Sala) aValue;
-//                    p.setSala((Sala) aValue);
-//                } else {
-                if(!listaSala.isEmpty()){
-                  
-                    
+                if (listaSala != null) {
                     for (Sala s : listaSala) {
-//                        if (s.getNazivSale().equals(aValue)) {
                         if (s.equals(aValue)) {
                             p.setSala(s);
                         }
                     }
                 }
-//                }
                 break;
             case 1:
                 SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -125,7 +111,7 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
                 }
                 break;
             case 2:
-                sdf = new SimpleDateFormat("hh:mm:ss");
+                sdf = new SimpleDateFormat("HH:mm:ss");
                 Date vreme;
                  {
                     try {
@@ -139,18 +125,15 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
         }
     }
 
-//        TODO: Zameni Object za agregaciju
     public ArrayList<Projekcija> getLista() {
         return lista;
     }
 
-//        TODO: Zameni Object za agregaciju
     public void setLista(ArrayList<Projekcija> lista) {
         this.lista = lista;
     }
 
     public void dodajRed() {
-//        TODO: Zameni Object za agregaciju
         lista.add(new Projekcija());
         fireTableDataChanged();
     }
@@ -164,5 +147,4 @@ public class ModelTabeleVremenaProjekcija extends AbstractTableModel {
         lista = new ArrayList<>();
         fireTableDataChanged();
     }
-
 }

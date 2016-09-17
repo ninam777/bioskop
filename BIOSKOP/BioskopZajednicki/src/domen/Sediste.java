@@ -5,11 +5,9 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import sun.print.resources.serviceui;
 
 /**
  *
@@ -20,18 +18,14 @@ public class Sediste extends AbstractObjekat {
     private Sala sala;
     private int red;
     private int brojSedista;
-    private boolean rezervisano;
-    private boolean kupljeno;
 
     public Sediste() {
     }
 
-    public Sediste(Sala sala, int red, int brojSedista, boolean rezervisano, boolean kupljeno) {
+    public Sediste(Sala sala, int red, int brojSedista) {
         this.sala = sala;
         this.red = red;
         this.brojSedista = brojSedista;
-        this.rezervisano = rezervisano;
-        this.kupljeno = kupljeno;
     }
 
     public Sala getSala() {
@@ -58,25 +52,9 @@ public class Sediste extends AbstractObjekat {
         this.brojSedista = brojSedista;
     }
 
-    public boolean isRezervisano() {
-        return rezervisano;
-    }
-
-    public void setRezervisano(boolean rezervisano) {
-        this.rezervisano = rezervisano;
-    }
-
-    public boolean isKupljeno() {
-        return kupljeno;
-    }
-
-    public void setKupljeno(boolean kupljeno) {
-        this.kupljeno = kupljeno;
-    }
-
     @Override
     public String toString() {
-        return "Sediste{" + "sala=" + sala + ", red=" + red + ", brojSedista=" + brojSedista + ", rezervisano=" + rezervisano + ", kupljeno=" + kupljeno + '}';
+        return "Sediste{" + "sala=" + sala + ", red=" + red + ", brojSedista=" + brojSedista + '}';
     }
 
     @Override
@@ -86,7 +64,7 @@ public class Sediste extends AbstractObjekat {
 
     @Override
     public String vratiParametre() {
-        return getSala().getSalaID() + ", " + red + ", " + brojSedista + ", " + rezervisano + ", " + kupljeno + "";
+        return getSala().getSalaID() + ", " + red + ", " + brojSedista + "";
     }
 
     @Override
@@ -107,9 +85,7 @@ public class Sediste extends AbstractObjekat {
                 int salaID = rs.getInt("salaID");
                 int red = rs.getInt("red");
                 int brojSedista = rs.getInt("brojSedista");
-                boolean reze = rs.getBoolean("rezervisano");
-                boolean kup = rs.getBoolean("kupljeno");
-                Sediste s = new Sediste(new Sala(salaID, null, 0), red, brojSedista, reze, kup);
+                Sediste s = new Sediste(new Sala(salaID, null, 0), red, brojSedista);
                 sedista.add(s);
             }
         } catch (Exception e) {
@@ -122,14 +98,11 @@ public class Sediste extends AbstractObjekat {
     public String vratiUpdateUpit() {
         return "salaID=" + getSala().getSalaID()
                 + ",red=" + red
-                + ",brojSedista=" + brojSedista 
-                + ",rezervisano=" + rezervisano
-                + ",kupljeno=" + kupljeno + "";
+                + ",brojSedista=" + brojSedista + "";
     }
 
     @Override
     public String vratiSlozenPK() {
         return " WHERE salaID= " + getSala().getSalaID() + " AND red=" + getRed() + " AND brojSedista=" + getBrojSedista();
     }
-
 }

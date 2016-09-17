@@ -28,13 +28,11 @@ public class ModelTabeleRediSedista extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-//        TODO: promeni broj kolona sa brojem kolona u tabeli klijenta
         return 2;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-//        TODO: Zameni Object za agregaciju
         Sediste s = lista.get(rowIndex);
 
         switch (columnIndex) {
@@ -46,9 +44,8 @@ public class ModelTabeleRediSedista extends AbstractTableModel {
             default:
                 return "N/A";
         }
-
     }
-//  TODO: namesti imena kolona
+
     String[] kolone = {"Red", "Broj sedišta"};
 
     @Override
@@ -58,11 +55,9 @@ public class ModelTabeleRediSedista extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-//        TODO: ukoliko zelimo da zabranimo promenu neke kolone ili polja u tabeli
 //        if (columnIndex == 0) {
 //            return false;
 //        }
-
         return true;
     }
 
@@ -80,18 +75,15 @@ public class ModelTabeleRediSedista extends AbstractTableModel {
         }
     }
 
-//        TODO: Zameni Object za agregaciju
     public ArrayList<Sediste> getLista() {
         return lista;
     }
 
-//        TODO: Zameni Object za agregaciju
     public void setLista(ArrayList<Sediste> lista) {
         this.lista = lista;
     }
 
     public void dodajRed() {
-//        TODO: Zameni Object za agregaciju
         lista.add(new Sediste());
         fireTableDataChanged();
     }
@@ -105,5 +97,4 @@ public class ModelTabeleRediSedista extends AbstractTableModel {
         lista = new ArrayList<>();
         fireTableDataChanged();
     }
-
 }

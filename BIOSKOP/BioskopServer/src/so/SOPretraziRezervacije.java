@@ -60,19 +60,16 @@ public class SOPretraziRezervacije extends AbstractSO {
             rez.getProjekcija().setFilm(f);
             rez.getProjekcija().setSala(s);
             if (findStringInSearchCriteria(rez)) {
-                System.out.println("Usao u uslov");
                 rezervacije.add(rez);
             }
         }
     }
 
     private boolean findStringInSearchCriteria(Rezervacija rez) {
-        System.out.println(rez);
         String[] unosiPretrage = kriterijumPretrage.split(" ");
         for (String unosPretrage : unosiPretrage) {
             if (rez.getNazivRezervacije().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")
                     || rez.getProjekcija().getFilm().getNazivFilma().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
-//                    || rez.getRadnik().getIme().toLowerCase().matches("(.*)" + unosPretrage.toLowerCase() + "(.*)")) {
                 return true;
             }
         }

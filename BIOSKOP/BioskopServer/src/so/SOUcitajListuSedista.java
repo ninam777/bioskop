@@ -6,8 +6,6 @@
 package so;
 
 import domen.AbstractObjekat;
-import domen.Film;
-import domen.Projekcija;
 import domen.Sala;
 import domen.Sediste;
 import java.sql.SQLException;

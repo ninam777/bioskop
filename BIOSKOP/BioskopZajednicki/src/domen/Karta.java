@@ -5,7 +5,6 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,6 @@ public class Karta extends AbstractObjekat{
     private int kartaID;
     private double cena;
     private Radnik radnik;
-//    private Rezervacija rezervacija;
     private Sediste sediste;
 
     public Karta() {
@@ -112,8 +110,7 @@ public class Karta extends AbstractObjekat{
                 int salaID = rs.getInt("salaID");
                 int red = rs.getInt("red");
                 int brojSedista = rs.getInt("brojSedista");
-//                Klijent k = new Klijent(klID, matBroj, pib, tekuciRacun, email, new Mesto(ptt, null), naziv);
-                Karta k = new Karta(new Projekcija(projekcijaID, null, null, null, null), kartaID, cena, new Radnik(radnikID, null, null, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista, false, false));
+                Karta k = new Karta(new Projekcija(projekcijaID, null, null, null, null), kartaID, cena, new Radnik(radnikID, null, null, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista));
                 karte.add(k);
             }
         } catch (Exception e) {
@@ -137,7 +134,4 @@ public class Karta extends AbstractObjekat{
     public String vratiSlozenPK() {
         return " WHERE projekcijaID= " + getProjekcija().getProjekcijaID() + " AND kartaID=" + getKartaID()+"";
     }
-
-   
-    
 }

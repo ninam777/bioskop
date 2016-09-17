@@ -23,14 +23,6 @@ public abstract class AbstractSO {
         db = new DBBroker();
     }
 
-//    public void otvoriBazu() {
-//        db.uspostaviKonekcijuMySql();
-//        System.out.println("Uspesna konekcija");
-//    }
-//
-//    public void zatvoriBazu() {
-//        db.raskiniKonekciju();
-//    }
     public void izvrsiOperaciju() throws Exception {
         try {
             db.ucitajDrajver();
@@ -44,35 +36,7 @@ public abstract class AbstractSO {
             db.rollback();
         }
         db.zatvoriKonekciju();
-//        try {
-//            otvoriBazu();
-//            izvrsiValidaciju();
-//            proveriPreduslove();
-//            izvrsiKonkretnuOperaciju();
-//            potvrdiTransakciju();
-//        } catch (ValidacijaException ve) {
-//
-//            throw new Exception(ve.getMessage());
-//        } catch (PredusloviException pe) {
-//            throw new Exception(pe.getMessage());
-//        } catch (SOException se) {
-//            ponistiTransakciju();
-//            throw new Exception(se.getMessage());
-//        }
-//        zatvoriBazu();
     }
 
-//    protected abstract void izvrsiValidaciju() throws ValidacijaException;
-//
-//    protected abstract void proveriPreduslove() throws PredusloviException ;
-//
     protected abstract void izvrsiKonkretnuOperaciju() throws Exception;
-//
-//    private void potvrdiTransakciju() {
-//        db.commit();
-//    }
-//
-//    private void ponistiTransakciju() {
-//        db.rollback();
-//    }
 }

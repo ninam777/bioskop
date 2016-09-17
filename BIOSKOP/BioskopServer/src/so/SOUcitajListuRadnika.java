@@ -6,11 +6,8 @@
 package so;
 
 import domen.AbstractObjekat;
-import domen.Film;
-import domen.Projekcija;
-import domen.Sala;
+import domen.Radnik;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +21,7 @@ public class SOUcitajListuRadnika extends AbstractSO {
     @Override
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
-            radnici = db.vratiSveObjekte(new Projekcija());
+            radnici = db.vratiSveObjekte(new Radnik());
         } catch (SQLException ex) {
             System.out.println("Nisu vracene projekcije.");
         }

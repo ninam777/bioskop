@@ -5,7 +5,6 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,8 +124,6 @@ public class Film extends AbstractObjekat{
     @Override
     public String vratiParametre() {
         return filmID + ", '" + nazivFilma + "', '" + zanr + "', " + trajanje + ", '" + reziser+ "', '"  + glumci + "', '" + opis + "', '" + periodPrikazivanja + "', " +  getRadnik().getRadnikID() + "" ;
-//        return "'" +nazivFilma + "', '" + zanr + "', " + trajanje + ", '" + reziser+ "', '"  + glumci + "', '" + opis + "', '" + periodPrikazivanja + "', " +  getRadnik().getRadnikID() + "" ;
-//        return "'" + filmID + "', '" + nazivFilma + "', '" + zanr + "', " + trajanje + ", '" + reziser+ "', '"  + glumci + "', '" + opis + "', '" + periodPrikazivanja + "', '" +  111 + "'" ;
     }
 
     @Override
@@ -178,5 +175,4 @@ public class Film extends AbstractObjekat{
     public String vratiSlozenPK() {
         return "Nema";
     }
-
 }

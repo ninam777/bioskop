@@ -226,7 +226,6 @@ public class FormaRezervacijaKarata extends javax.swing.JFrame {
             List<RezervisanoSediste> rezSedista = new ArrayList<>();
 
             for (Sediste sediste : sedista) {
-                sediste.setRezervisano(true);
                 sediste.setSala(projekcija.getSala());
                 RezervisanoSediste rs = new RezervisanoSediste(r, sediste, 30);
                 rezSedista.add(rs);

@@ -41,14 +41,12 @@ public class FormaRepertoar extends javax.swing.JFrame {
      */
     public FormaRepertoar(java.awt.Frame parent, boolean modal) {
 
-//        Sesija.vratiInstancu().getMapa().put("nacin", "unos");
         initComponents();
 
     }
 
     FormaRepertoar() {
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-//        Sesija.vratiInstancu().getMapa().put("nacin", "prikaz");
         initComponents();
         k = new Kontroler();
         try {
@@ -462,7 +460,6 @@ public class FormaRepertoar extends javax.swing.JFrame {
             }
             mtf.setLista(lista);
             jtFilmovi.setModel(mtf);
-//            srediFormu();
         } catch (IOException ex) {
             Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -503,7 +500,6 @@ public class FormaRepertoar extends javax.swing.JFrame {
 
                 Sesija.vratiInstancu().getMapa().put("film", f);
                 new FormaPostavljanjeFilma().setVisible(true);
-//                srediFormu();
             } catch (IOException ex) {
                 Logger.getLogger(FormaRepertoar.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

@@ -14,13 +14,8 @@ import domen.Radnik;
 import domen.Rezervacija;
 import domen.RezervisanoSediste;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import konstante.Konstante;
 
@@ -68,10 +63,10 @@ public class Kontroler {
             return false;
         }
     }
-    
+
     public boolean sacuvajKarteZaRervisanoSediste(List<KartaZaRezervisanoSediste> karte) throws IOException, ClassNotFoundException {
         KlijentskiTransferObjekat kt = new KlijentskiTransferObjekat();
-        kt.setOperacija(Konstante.OPERACIJA_SACUVAJ_KARTE_ZA_REZ_SED);
+        kt.setOperacija(Konstante.OPERACIJA_SACUVAJ_KARTE);
         kt.setParametar(karte);
 
         Komunikacija.vratiInstancu().posaljiZahtev(kt);
@@ -82,28 +77,6 @@ public class Kontroler {
             return false;
         }
     }
-    
-//    public boolean sacuvajKarte(List<Karta> karte, List<KartaZaRezervisanoSediste> karteZaRez) throws IOException, ClassNotFoundException {
-//        KlijentskiTransferObjekat kt = new KlijentskiTransferObjekat();
-//        List<AbstractObjekat> lista = new LinkedList<>();
-////        lista.add(karte);
-//        for (AbstractObjekat ao : karte) {
-//            lista.add(ao);
-//        }
-//        for (AbstractObjekat ao : karteZaRez) {
-//            lista.add(ao);
-//        }
-//        kt.setOperacija(Konstante.OPERACIJA_SACUVAJ_KARTE);
-//        kt.setParametar(lista);
-//
-//        Komunikacija.vratiInstancu().posaljiZahtev(kt);
-//        ServerskiTransferObjekat st = Komunikacija.vratiInstancu().procitajOdgovor();
-//        if (st.getUspesnostIzvrsenjaOperacije() == 1) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 
     public boolean sacuvajRezervaciju(Rezervacija r, List<RezervisanoSediste> lrs) throws IOException, ClassNotFoundException {
         KlijentskiTransferObjekat kt = new KlijentskiTransferObjekat();
@@ -162,7 +135,7 @@ public class Kontroler {
             return null;
         }
     }
-    
+
     public List<AbstractObjekat> vratiListuRezervisanihSedista() throws IOException, ClassNotFoundException {
         KlijentskiTransferObjekat kt = new KlijentskiTransferObjekat();
         kt.setOperacija(Konstante.OPERACIJA_VRATI_REZ_SEDISTA);
@@ -209,7 +182,6 @@ public class Kontroler {
         Komunikacija.vratiInstancu().posaljiZahtev(kt);
         ServerskiTransferObjekat st = Komunikacija.vratiInstancu().procitajOdgovor();
         if (st.getUspesnostIzvrsenjaOperacije() == 1) {
-            System.out.println(((Radnik) st.getPodaci()).getRadnikID());
             return (Radnik) st.getPodaci();
         } else {
             return null;
@@ -307,5 +279,4 @@ public class Kontroler {
         }
         return -1;
     }
-
 }

@@ -6,7 +6,6 @@
 package so;
 
 import domen.AbstractObjekat;
-import domen.Film;
 import domen.Projekcija;
 import domen.Radnik;
 import domen.Rezervacija;
@@ -30,14 +29,11 @@ public class SOUcitajRezervaciju extends AbstractSO {
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
             rezervacija = db.vratiObjekatPoKljucu(new Rezervacija(), id);
-            System.out.println(rezervacija);
             Rezervacija rez = (Rezervacija) rezervacija;
             Projekcija p = (Projekcija) db.vratiObjekatPoKljucu(new Projekcija(), rez.getProjekcija().getProjekcijaID());
             rez.setProjekcija(p);
-            System.out.println(p);
             Radnik r = (Radnik) db.vratiObjekatPoKljucu(new Radnik(), rez.getRadnik().getRadnikID());
             rez.setRadnik(r);
-            System.out.println(r);
             rezervacija = rez;
 
         } catch (SQLException ex) {

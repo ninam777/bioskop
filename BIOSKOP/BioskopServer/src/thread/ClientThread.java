@@ -193,20 +193,6 @@ public class ClientThread extends Thread {
                     }
                     out.writeObject(st);
                 }
-                
-                if (operacija == Konstante.OPERACIJA_SACUVAJ_KARTE_ZA_REZ_SED) {
-                    ServerskiTransferObjekat st = new ServerskiTransferObjekat();
-                    try {
-                        List<AbstractObjekat> karte = (List<AbstractObjekat>) kt.getParametar();
-                        Kontroler.zapamtiKarteZaRezervisanoSediste(karte);
-                        st.setUspesnostIzvrsenjaOperacije(1);
-
-                    } catch (Exception ex) {
-                        st.setUspesnostIzvrsenjaOperacije(-1);
-                        st.setException(ex);
-                    }
-                    out.writeObject(st);
-                }
 
                 if (operacija == Konstante.OPERACIJA_OBRISI_FILM) {
 
@@ -322,5 +308,4 @@ public class ClientThread extends Thread {
             }
         }
     }
-
 }

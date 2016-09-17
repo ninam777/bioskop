@@ -7,12 +7,8 @@ package so;
 
 import domen.AbstractObjekat;
 import domen.Film;
-import domen.Projekcija;
 import domen.Radnik;
-import domen.Sala;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -32,11 +28,9 @@ public class SOUcitajFilm extends AbstractSO {
     protected void izvrsiKonkretnuOperaciju() throws Exception {
         try {
             film = db.vratiObjekatPoKljucu(new Film(), id);
-            System.out.println(film);
             Film f = (Film) film;
             Radnik r = (Radnik) db.vratiObjekatPoKljucu(new Radnik(), f.getRadnik().getRadnikID());
             f.setRadnik(r);
-            System.out.println(r);
             film = f;
 
         } catch (SQLException ex) {

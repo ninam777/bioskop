@@ -5,7 +5,6 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +87,7 @@ public class RezervisanoSediste extends AbstractObjekat{
                 int red = rs.getInt("red");
                 int brojSedista = rs.getInt("brojSedista");
                 int trajanjeRezervacije = rs.getInt("trajanjeRezervacije");
-                RezervisanoSediste rezSed = new RezervisanoSediste(new Rezervacija(new Projekcija(projekcijaID, null, null, null, null), rezervacijaID, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista, false, false), trajanjeRezervacije);
+                RezervisanoSediste rezSed = new RezervisanoSediste(new Rezervacija(new Projekcija(projekcijaID, null, null, null, null), rezervacijaID, null, null), new Sediste(new Sala(salaID, null, 0), red, brojSedista), trajanjeRezervacije);
                 rezervisanaSedista.add(rezSed);
             }
         } catch (Exception e) {
@@ -111,6 +110,4 @@ public class RezervisanoSediste extends AbstractObjekat{
     public String vratiSlozenPK() {
         return " WHERE projekcijaID= " + getRezervacija().getProjekcija().getProjekcijaID() + " AND rezervacijaID=" + getRezervacija().getRezervacijaID() + " AND salaID=" + getSediste().getSala().getSalaID() + " AND red=" + getSediste().getRed() + " AND brojSedista=" + getSediste().getBrojSedista() + "";
     }
-
-   
 }

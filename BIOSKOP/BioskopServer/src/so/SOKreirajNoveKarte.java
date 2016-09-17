@@ -5,7 +5,6 @@
  */
 package so;
 
-import db.DBBroker;
 import domen.AbstractObjekat;
 
 /**

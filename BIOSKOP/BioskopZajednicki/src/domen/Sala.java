@@ -5,7 +5,6 @@
  */
 package domen;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,6 @@ public class Sala extends AbstractObjekat{
 
     @Override
     public String toString() {
-//        return "Sala{" + "salaID=" + salaID + ", nazivSale=" + nazivSale + ", kapacitet=" + kapacitet + '}';
         return nazivSale;
     }
     
@@ -106,5 +104,4 @@ public class Sala extends AbstractObjekat{
     public String vratiSlozenPK() {
         return "Nema";
     }
-
 }
