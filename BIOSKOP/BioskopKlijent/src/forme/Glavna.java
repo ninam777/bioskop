@@ -129,7 +129,7 @@ public class Glavna extends javax.swing.JFrame {
                          this.setVisible(false);
                 
             } else {
-                jlPrijava.setText("Sistem ne može da pronađe službenika.");
+                jlPrijava.setText("Sistem ne može da pronađe radnika.");
             }
         } catch (IOException ex) {
             Logger.getLogger(Glavna.class.getName()).log(Level.SEVERE, null, ex);
